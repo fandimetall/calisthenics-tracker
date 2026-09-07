@@ -3,7 +3,20 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Phase 4: Hybrid Supabase & Offline-first Service.
+enum RegisterStatus {
+  success,
+  needsEmailConfirmation,
+  emailAlreadyInUse,
+  error,
+}
+
+class RegisterOutcome {
+  final RegisterStatus status;
+  final String? message;
+  const RegisterOutcome(this.status, [this.message]);
+}
+
+/// Phase 4: Hybrid Supabase + Offline-First Service
 /// Works with live Supabase credentials, or gracefully falls back
 /// to local storage (SharedPreferences) when credentials are not configured.
 class SupabaseService {
@@ -70,7 +83,9 @@ class SupabaseService {
   // Auth Operations
   // ---------------------------------------------------------------------------
 
-  Future<bool> register({
+  Stream<AuthState>? get onAuthStateChange => _client?.auth.onAuthStateChange;
+
+  Future<RegisterOutcome> register({
     required String name,
     required String email,
     required String password,
@@ -82,26 +97,33 @@ class SupabaseService {
           password: password,
           data: {'name': name},
         );
-        if (res.user == null) return false;
-        // If email confirmation is enabled, session may be null.
-        // Auto-login so the user proceeds immediately.
-        if (res.session == null) {
-          try {
-            await _client!.auth.signInWithPassword(
-              email: email,
-              password: password,
-            );
-          } catch (_) {
-            // Email confirmation required and auto-login blocked.
-            // Still save locally so user can proceed offline.
-            final sp = await SharedPreferences.getInstance();
-            await sp.setString('auth_session', json.encode({'email': email, 'name': name}));
-          }
+        if (res.user == null) {
+          return const RegisterOutcome(RegisterStatus.error, 'Gagal mendaftar. Silakan coba lagi.');
         }
-        return true;
+
+        // Check if email confirmation is required
+        if (res.session == null) {
+          return const RegisterOutcome(
+            RegisterStatus.needsEmailConfirmation,
+            'Tautan verifikasi telah dikirim ke email Anda.',
+          );
+        }
+
+        return const RegisterOutcome(RegisterStatus.success);
+      } on AuthException catch (ae) {
+        debugPrint('Supabase AuthException: ${ae.message}');
+        if (ae.message.toLowerCase().contains('already registered') ||
+            ae.statusCode == '422' ||
+            ae.code == 'user_already_exists') {
+          return const RegisterOutcome(
+            RegisterStatus.emailAlreadyInUse,
+            'Email sudah terdaftar. Silakan pilih tab Masuk.',
+          );
+        }
+        return RegisterOutcome(RegisterStatus.error, ae.message);
       } catch (e) {
         debugPrint('Supabase signUp error: $e');
-        return false;
+        return RegisterOutcome(RegisterStatus.error, e.toString());
       }
     }
 
@@ -109,11 +131,16 @@ class SupabaseService {
     final sp = await SharedPreferences.getInstance();
     final raw = sp.getString('auth_users');
     final users = raw == null ? <String, dynamic>{} : json.decode(raw) as Map<String, dynamic>;
-    if (users.containsKey(email)) return false;
+    if (users.containsKey(email)) {
+      return const RegisterOutcome(
+        RegisterStatus.emailAlreadyInUse,
+        'Email sudah terdaftar. Silakan pilih tab Masuk.',
+      );
+    }
     users[email] = {'password': password, 'name': name};
     await sp.setString('auth_users', json.encode(users));
     await sp.setString('auth_session', json.encode({'email': email, 'name': name}));
-    return true;
+    return const RegisterOutcome(RegisterStatus.success);
   }
 
   Future<bool> login({

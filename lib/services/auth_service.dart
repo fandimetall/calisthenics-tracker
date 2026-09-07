@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'supabase_service.dart';
 
 /// Auth facade — delegates to SupabaseService (live or local fallback).
@@ -6,7 +7,9 @@ import 'supabase_service.dart';
 class AuthService {
   final _supa = SupabaseService.instance;
 
-  Future<bool> register({
+  Stream<AuthState>? get onAuthStateChange => _supa.onAuthStateChange;
+
+  Future<RegisterOutcome> register({
     required String name,
     required String email,
     required String password,

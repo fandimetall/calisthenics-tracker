@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/responsive_layout.dart';
 import '../../services/auth_service.dart';
+import '../../services/supabase_service.dart';
 
 /// Unified Auth Screen — Masuk & Daftar dalam satu tampilan (no Navigator stack bugs).
 class LoginScreen extends StatefulWidget {
@@ -26,17 +29,44 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = AuthService();
 
   String? _error;
+  String? _notice;
+  bool _isSuccessNotice = false;
   bool _loading = false;
   bool _obscurePass = true;
+  StreamSubscription<AuthState>? _authSub;
 
   @override
   void initState() {
     super.initState();
     _isRegister = widget.initialRegister;
+
+    // Listen for automatic Supabase verification (when user clicks link in email)
+    _authSub = _auth.onAuthStateChange?.listen((AuthState data) {
+      final event = data.event;
+      final session = data.session;
+      if (session != null &&
+          (event == AuthChangeEvent.signedIn ||
+           event == AuthChangeEvent.userUpdated ||
+           event == AuthChangeEvent.tokenRefreshed)) {
+        if (!mounted) return;
+        setState(() {
+          _isRegister = false;
+          _error = null;
+          _notice = 'Email berhasil diverifikasi! Mengalihkan ke aplikasi...';
+          _isSuccessNotice = true;
+        });
+        Future.delayed(const Duration(milliseconds: 1200), () {
+          if (mounted) {
+            widget.onSuccess();
+          }
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
+    _authSub?.cancel();
     _name.dispose();
     _email.dispose();
     _pass.dispose();
@@ -180,6 +210,49 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+
+              // Notice / Info Box (Email Verification Sent or Success)
+              if (_notice != null) ...[
+                const SizedBox(height: 14),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: _isSuccessNotice
+                        ? Colors.green.withValues(alpha: 0.12)
+                        : Colors.orange.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: _isSuccessNotice
+                          ? Colors.green.withValues(alpha: 0.4)
+                          : Colors.orange.withValues(alpha: 0.4),
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        _isSuccessNotice
+                            ? Icons.check_circle_outline_rounded
+                            : Icons.mark_email_unread_outlined,
+                        size: 20,
+                        color: _isSuccessNotice ? Colors.green : Colors.orange,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          _notice!,
+                          style: GoogleFonts.inter(
+                            color: _isSuccessNotice ? Colors.green[800] ?? Colors.green : Colors.orange[900] ?? Colors.orange,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            height: 1.35,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
 
               // Error Box
               if (_error != null) ...[
@@ -385,16 +458,41 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
       setState(() => _loading = true);
-      final ok = await _auth.register(name: nameVal, email: emailVal, password: passVal);
+      final outcome = await _auth.register(name: nameVal, email: emailVal, password: passVal);
       if (!mounted) return;
       setState(() => _loading = false);
-      if (ok) {
-        if (Navigator.canPop(context)) {
-          Navigator.of(context).popUntil((r) => r.isFirst);
-        }
-        widget.onSuccess();
-      } else {
-        setState(() => _error = 'Email sudah terdaftar. Silakan pilih tab Masuk.');
+
+      switch (outcome.status) {
+        case RegisterStatus.success:
+          if (Navigator.canPop(context)) {
+            Navigator.of(context).popUntil((r) => r.isFirst);
+          }
+          widget.onSuccess();
+          break;
+
+        case RegisterStatus.needsEmailConfirmation:
+          setState(() {
+            _isRegister = false; // Pindahkan langsung ke tab Masuk
+            _error = null;
+            _pass.clear();
+            _isSuccessNotice = false;
+            _notice = 'Tautan verifikasi telah dikirim ke $emailVal. Buka email Anda, klik konfirmasi, lalu masukkan password di bawah untuk masuk.';
+          });
+          break;
+
+        case RegisterStatus.emailAlreadyInUse:
+          setState(() {
+            _error = 'Email sudah terdaftar. Silakan pilih tab Masuk.';
+            _notice = null;
+          });
+          break;
+
+        case RegisterStatus.error:
+          setState(() {
+            _error = outcome.message ?? 'Terjadi kesalahan saat pendaftaran.';
+            _notice = null;
+          });
+          break;
       }
     } else {
       if (emailVal.isEmpty || passVal.isEmpty) {

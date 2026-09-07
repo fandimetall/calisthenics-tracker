@@ -16,10 +16,10 @@ void main() {
     test('Register succeeds for new user and fails for duplicate', () async {
       final auth = AuthService();
       final ok1 = await auth.register(name: 'Fandi', email: 'test@cali.id', password: 'password123');
-      expect(ok1, isTrue);
+      expect(ok1.status, equals(RegisterStatus.success));
 
       final ok2 = await auth.register(name: 'Fandi 2', email: 'test@cali.id', password: 'password456');
-      expect(ok2, isFalse);
+      expect(ok2.status, equals(RegisterStatus.emailAlreadyInUse));
     });
 
     test('Login succeeds with correct password and fails with wrong', () async {

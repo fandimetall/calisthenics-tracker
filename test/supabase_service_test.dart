@@ -25,7 +25,7 @@ void main() {
         email: 'test@local.id',
         password: 'pass123',
       );
-      expect(ok, isTrue);
+      expect(ok.status, equals(RegisterStatus.success));
 
       // Duplicate fails
       final dup = await svc.register(
@@ -33,7 +33,7 @@ void main() {
         email: 'test@local.id',
         password: 'pass456',
       );
-      expect(dup, isFalse);
+      expect(dup.status, equals(RegisterStatus.emailAlreadyInUse));
 
       // Login with wrong password fails
       final bad = await svc.login(email: 'test@local.id', password: 'wrong');
