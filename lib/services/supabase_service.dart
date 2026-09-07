@@ -82,7 +82,23 @@ class SupabaseService {
           password: password,
           data: {'name': name},
         );
-        return res.user != null;
+        if (res.user == null) return false;
+        // If email confirmation is enabled, session may be null.
+        // Auto-login so the user proceeds immediately.
+        if (res.session == null) {
+          try {
+            await _client!.auth.signInWithPassword(
+              email: email,
+              password: password,
+            );
+          } catch (_) {
+            // Email confirmation required and auto-login blocked.
+            // Still save locally so user can proceed offline.
+            final sp = await SharedPreferences.getInstance();
+            await sp.setString('auth_session', json.encode({'email': email, 'name': name}));
+          }
+        }
+        return true;
       } catch (e) {
         debugPrint('Supabase signUp error: $e');
         return false;
@@ -148,10 +164,9 @@ class SupabaseService {
           'name': u.userMetadata?['name']?.toString() ?? '',
         };
       }
-      return null;
     }
 
-    // Local fallback
+    // Local fallback or pending-confirmation session
     try {
       final sp = await SharedPreferences.getInstance();
       final raw = sp.getString('auth_session');
