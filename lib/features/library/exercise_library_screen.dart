@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/responsive_layout.dart';
+import '../../core/widgets/exercise_video_launcher.dart';
 import '../../services/ai/models/workout_plan.dart';
 
 class ExerciseLibraryScreen extends StatefulWidget {
@@ -214,11 +215,21 @@ class _ExerciseLibraryScreenState extends State<ExerciseLibraryScreen> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  ex.instructions.isNotEmpty ? ex.instructions : 'Lakukan gerakan dengan teknik perlahan dan terkontrol.',
+                  ex.instructions.isNotEmpty ? ex.instructions : 'Lakukan gerakan ini dengan kontrol tempo yang stabil dan pernapasan teratur.',
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     height: 1.5,
                     color: isDark ? AppColors.inkMutedDark : AppColors.inkMutedLight,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Video Tutorial Launcher
+                SizedBox(
+                  width: double.infinity,
+                  child: ExerciseVideoLauncher.buildTutorialButton(
+                    context: context,
+                    exerciseName: ex.name,
                   ),
                 ),
                 const SizedBox(height: 20),

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/responsive_layout.dart';
+import '../../core/widgets/exercise_video_launcher.dart';
 import '../../services/supabase_service.dart';
 
 class WorkoutSessionScreen extends StatefulWidget {
@@ -581,6 +582,12 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
                           ),
                         ),
                       ],
+                      const SizedBox(height: 8),
+                      ExerciseVideoLauncher.buildTutorialButton(
+                        context: context,
+                        exerciseName: name,
+                        compact: true,
+                      ),
                     ],
                   ),
                 ),
