@@ -1,0 +1,2456 @@
+{
+  "metadata": {
+    "date_compiled": "2026-09-03",
+    "version": "1.0.0",
+    "sources": [
+      {
+        "id": "bwf_rr",
+        "title": "Reddit BWF Recommended Routine",
+        "url": "https://redditbwf.github.io/wiki/recommended_routine.html",
+        "type": "program"
+      },
+      {
+        "id": "gymnasetips_chart",
+        "title": "GymnaseTips Calisthenics Exercises Chart (50+ moves)",
+        "url": "https://www.gymnasetips.com/calisthenics-exercises-chart/",
+        "type": "exercise_database"
+      },
+      {
+        "id": "gymnasetips_plan",
+        "title": "GymnaseTips Complete Workout Plan Beginner to Advanced",
+        "url": "https://www.gymnasetips.com/calisthenics-workout-plan-beginner-advanced/",
+        "type": "program"
+      },
+      {
+        "id": "odin_overload",
+        "title": "Odin Fitness - Science of Progressive Overload in Bodyweight Training",
+        "url": "https://www.odin.fitness/blog/science-progressive-overload-bodyweight-training",
+        "type": "article"
+      },
+      {
+        "id": "schoenfeld_2010",
+        "title": "Schoenfeld 2010 - Mechanical tension as primary driver",
+        "url": null,
+        "journal": "Journal of Strength and Conditioning Research",
+        "type": "peer_reviewed"
+      },
+      {
+        "id": "schoenfeld_2017",
+        "title": "Schoenfeld 2017 - Dose-response relationship sets and hypertrophy",
+        "url": null,
+        "journal": "Journal of Sports Sciences",
+        "type": "peer_reviewed"
+      },
+      {
+        "id": "thomas_calisthenics",
+        "title": "Thomas et al - 8 weeks calisthenics study",
+        "url": null,
+        "journal": "Isokinetics and Exercise Science",
+        "type": "peer_reviewed"
+      },
+      {
+        "id": "uh_overload",
+        "title": "University Hospitals - Progressive Overload guide",
+        "url": null,
+        "note": "Increase weight 10% or less each week",
+        "type": "clinical_guideline"
+      }
+    ]
+  },
+  "progression_rules": {
+    "rep_progression": "When you hit 3x8 with good form, move to next progression. Start next at 3x5.",
+    "tempo": "10X0 (1s down, 0 pause bottom, explode up, 0 pause top)",
+    "rest": "90s between paired exercises (3min total between same exercise sets)",
+    "intensity": "Stay 1 rep short of failure (RIR 1-2)",
+    "weekly_increase": "Add 1-2 reps per set per week",
+    "level_timeline": {
+      "1_to_2": "4-12 weeks",
+      "2_to_3": "3-9 months",
+      "3_to_4": "6-24 months"
+    },
+    "sets_per_muscle_weekly": "10-15 hard sets",
+    "plateau_fix_order": [
+      "tempo",
+      "volume",
+      "variation",
+      "external_load"
+    ]
+  },
+  "exercises": {
+    "push": [
+      {
+        "id": "push_wall",
+        "name": "Wall Push-up",
+        "level": 1,
+        "muscles": [
+          "chest",
+          "anterior_deltoid",
+          "triceps"
+        ],
+        "target_reps": "15-25",
+        "equipment": "wall",
+        "instructions": "Stand arm's length from wall, hands shoulder-width on wall at chest height. Bend elbows to bring chest toward wall, push back. Keep body straight.",
+        "progression_from": null,
+        "progression_to": "push_incline"
+      },
+      {
+        "id": "push_knee",
+        "name": "Knee Push-up",
+        "level": 1,
+        "muscles": [
+          "chest",
+          "anterior_deltoid",
+          "triceps"
+        ],
+        "target_reps": "10-15",
+        "equipment": "none",
+        "instructions": "Hands shoulder-width on floor, knees on ground, ankles crossed. Lower chest to floor keeping hips extended. Push back up.",
+        "progression_from": "push_incline",
+        "progression_to": "push_standard"
+      },
+      {
+        "id": "push_incline",
+        "name": "Incline Push-up",
+        "level": 1,
+        "muscles": [
+          "chest",
+          "anterior_deltoid",
+          "triceps"
+        ],
+        "target_reps": "12-20",
+        "equipment": "bench_or_step",
+        "instructions": "Hands on elevated surface (bench, step, counter). Body straight from head to heels. Lower chest to surface, push back. Decrease height as you progress.",
+        "progression_from": "push_wall",
+        "progression_to": "push_knee"
+      },
+      {
+        "id": "push_standard",
+        "name": "Standard Push-up",
+        "level": 2,
+        "muscles": [
+          "chest",
+          "anterior_deltoid",
+          "triceps",
+          "serratus_anterior"
+        ],
+        "target_reps": "10-25",
+        "equipment": "none",
+        "instructions": "Hands shoulder-width, fingers forward. Body rigid from head to heels. Lower until chest nearly touches floor, elbows at ~45 degrees. Push up to full lockout.",
+        "progression_from": "push_knee",
+        "progression_to": "push_diamond"
+      },
+      {
+        "id": "push_diamond",
+        "name": "Diamond Push-up",
+        "level": 2,
+        "muscles": [
+          "triceps",
+          "chest",
+          "anterior_deltoid"
+        ],
+        "target_reps": "8-15",
+        "equipment": "none",
+        "instructions": "Hands together under chest, index fingers and thumbs forming a diamond shape. Lower chest to hands, push back up. Elbows stay close to body.",
+        "progression_from": "push_standard",
+        "progression_to": "push_decline"
+      },
+      {
+        "id": "push_wide",
+        "name": "Wide Push-up",
+        "level": 2,
+        "muscles": [
+          "chest",
+          "anterior_deltoid",
+          "triceps"
+        ],
+        "target_reps": "10-20",
+        "equipment": "none",
+        "instructions": "Hands placed wider than shoulder-width (1.5x). Lower chest to floor. Emphasizes chest stretch. Keep core tight, body straight.",
+        "progression_from": "push_standard",
+        "progression_to": "push_archer"
+      },
+      {
+        "id": "push_pike",
+        "name": "Pike Push-up",
+        "level": 2,
+        "muscles": [
+          "anterior_deltoid",
+          "medial_deltoid",
+          "triceps",
+          "upper_chest"
+        ],
+        "target_reps": "8-12",
+        "equipment": "none",
+        "instructions": "Start in downward dog position, hips high. Hands shoulder-width. Bend elbows to lower head toward floor between hands. Push back up. Vertical pressing foundation.",
+        "progression_from": "push_standard",
+        "progression_to": "push_elevated_pike"
+      },
+      {
+        "id": "push_bench_dip",
+        "name": "Bench Dip",
+        "level": 2,
+        "muscles": [
+          "triceps",
+          "anterior_deltoid",
+          "chest"
+        ],
+        "target_reps": "10-15",
+        "equipment": "bench_or_chair",
+        "instructions": "Hands on bench behind you, fingers forward. Legs extended or bent. Lower body by bending elbows to ~90 degrees. Push back up. Keep back close to bench.",
+        "progression_from": null,
+        "progression_to": "push_parallel_dip"
+      },
+      {
+        "id": "push_decline",
+        "name": "Decline Push-up",
+        "level": 3,
+        "muscles": [
+          "upper_chest",
+          "anterior_deltoid",
+          "triceps",
+          "serratus_anterior"
+        ],
+        "target_reps": "10-15",
+        "equipment": "bench_or_step",
+        "instructions": "Feet elevated on bench or step, hands on floor shoulder-width. Lower chest to floor, push back up. Higher elevation increases difficulty and upper chest emphasis.",
+        "progression_from": "push_diamond",
+        "progression_to": "push_archer"
+      },
+      {
+        "id": "push_archer",
+        "name": "Archer Push-up",
+        "level": 3,
+        "muscles": [
+          "chest",
+          "triceps",
+          "anterior_deltoid",
+          "core"
+        ],
+        "target_reps": "5-8 per side",
+        "equipment": "none",
+        "instructions": "Wide hand placement. Lower toward one hand while the other arm extends straight to the side. Push back up. Alternate sides. Precursor to one-arm push-up.",
+        "progression_from": "push_decline",
+        "progression_to": "push_onearm"
+      },
+      {
+        "id": "push_parallel_dip",
+        "name": "Parallel Bar Dip",
+        "level": 3,
+        "muscles": [
+          "chest",
+          "triceps",
+          "anterior_deltoid",
+          "core"
+        ],
+        "target_reps": "6-12",
+        "equipment": "parallel_bars_or_dip_station",
+        "instructions": "Support yourself on parallel bars, arms straight. Lean slightly forward. Lower until upper arms are parallel to floor. Push back up to full lockout. Control the descent.",
+        "progression_from": "push_bench_dip",
+        "progression_to": null
+      },
+      {
+        "id": "push_elevated_pike",
+        "name": "Elevated Pike Push-up",
+        "level": 3,
+        "muscles": [
+          "anterior_deltoid",
+          "medial_deltoid",
+          "triceps",
+          "upper_chest"
+        ],
+        "target_reps": "6-10",
+        "equipment": "bench_or_box",
+        "instructions": "Feet elevated on bench in pike position. More vertical than regular pike push-up. Lower head toward floor between hands, push back up. Bridge to handstand push-ups.",
+        "progression_from": "push_pike",
+        "progression_to": "push_wall_hspu"
+      },
+      {
+        "id": "push_pseudo_planche",
+        "name": "Pseudo-planche Push-up",
+        "level": 3,
+        "muscles": [
+          "chest",
+          "anterior_deltoid",
+          "biceps",
+          "core",
+          "serratus_anterior"
+        ],
+        "target_reps": "6-10",
+        "equipment": "none",
+        "instructions": "Hands by waist or hips (fingers pointing sideways or backward). Lean forward past hands. Perform push-up with this extreme forward lean. Very high shoulder and core demand.",
+        "progression_from": "push_standard",
+        "progression_to": "push_planche"
+      },
+      {
+        "id": "push_wall_hspu",
+        "name": "Wall Handstand Push-up",
+        "level": 4,
+        "muscles": [
+          "anterior_deltoid",
+          "medial_deltoid",
+          "triceps",
+          "trapezius",
+          "core"
+        ],
+        "target_reps": "3-8",
+        "equipment": "wall",
+        "instructions": "Kick up to handstand against wall, facing away. Hands shoulder-width. Lower head to floor with control, push back up. Keep core tight, slight hollow body.",
+        "progression_from": "push_elevated_pike",
+        "progression_to": "push_freestanding_hspu"
+      },
+      {
+        "id": "push_onearm",
+        "name": "One-arm Push-up",
+        "level": 4,
+        "muscles": [
+          "chest",
+          "triceps",
+          "anterior_deltoid",
+          "core",
+          "obliques"
+        ],
+        "target_reps": "3-5 per side",
+        "equipment": "none",
+        "instructions": "Wider stance for balance. One hand on floor under chest, other behind back. Lower chest to floor, push back up. Minimize hip rotation. Keep body as square as possible.",
+        "progression_from": "push_archer",
+        "progression_to": null
+      },
+      {
+        "id": "push_planche",
+        "name": "Planche Push-up",
+        "level": 4,
+        "muscles": [
+          "chest",
+          "anterior_deltoid",
+          "biceps",
+          "core",
+          "serratus_anterior",
+          "forearms"
+        ],
+        "target_reps": "1-5",
+        "equipment": "parallettes_optional",
+        "instructions": "From planche hold position (body horizontal, no feet on ground), perform a push-up. Extreme strength requirement. Begin with tuck planche push-ups.",
+        "progression_from": "push_pseudo_planche",
+        "progression_to": null
+      },
+      {
+        "id": "push_freestanding_hspu",
+        "name": "Freestanding Handstand Push-up",
+        "level": 4,
+        "muscles": [
+          "anterior_deltoid",
+          "medial_deltoid",
+          "triceps",
+          "trapezius",
+          "core"
+        ],
+        "target_reps": "3-5",
+        "equipment": "none",
+        "instructions": "Freestanding handstand, no wall. Lower head toward floor, push back up while maintaining balance. Requires mastery of both handstand balance and pressing strength.",
+        "progression_from": "push_wall_hspu",
+        "progression_to": null
+      },
+      {
+        "id": "push_clap",
+        "name": "Clap Push-up",
+        "level": 4,
+        "muscles": [
+          "chest",
+          "triceps",
+          "anterior_deltoid",
+          "core"
+        ],
+        "target_reps": "8-12",
+        "equipment": "none",
+        "instructions": "Standard push-up position. Lower chest, then explosively push off floor, clap hands mid-air, land softly back in push-up position. Plyometric power exercise.",
+        "progression_from": "push_standard",
+        "progression_to": null
+      }
+    ],
+    "pull": [
+      {
+        "id": "pull_dead_hang",
+        "name": "Dead Hang",
+        "level": 1,
+        "muscles": [
+          "forearms",
+          "grip",
+          "lats",
+          "shoulders"
+        ],
+        "target_reps": "30-60s hold",
+        "equipment": "pull_up_bar",
+        "instructions": "Hang from bar with overhand grip, shoulder-width. Arms fully extended, shoulders packed (pull shoulder blades slightly down). Hold for time. Build grip foundation.",
+        "progression_from": null,
+        "progression_to": "pull_scapular"
+      },
+      {
+        "id": "pull_scapular",
+        "name": "Scapular Pull-up",
+        "level": 1,
+        "muscles": [
+          "lower_trapezius",
+          "rhomboids",
+          "lats"
+        ],
+        "target_reps": "8-12",
+        "equipment": "pull_up_bar",
+        "instructions": "Hang from bar, arms straight. Without bending elbows, pull shoulder blades down and together, raising body slightly. Release back to dead hang. Teaches scapular engagement.",
+        "progression_from": "pull_dead_hang",
+        "progression_to": "pull_negative"
+      },
+      {
+        "id": "pull_inverted_high",
+        "name": "Inverted Row (High Bar)",
+        "level": 1,
+        "muscles": [
+          "lats",
+          "rhomboids",
+          "rear_deltoid",
+          "biceps",
+          "core"
+        ],
+        "target_reps": "10-15",
+        "equipment": "bar_at_waist_height_or_table",
+        "instructions": "Bar at chest height, hang underneath with feet on floor, body straight. Pull chest to bar squeezing shoulder blades. Lower with control. Higher bar = easier.",
+        "progression_from": null,
+        "progression_to": "pull_inverted_low"
+      },
+      {
+        "id": "pull_doorway_row",
+        "name": "Doorway Row",
+        "level": 1,
+        "muscles": [
+          "lats",
+          "rhomboids",
+          "rear_deltoid",
+          "biceps"
+        ],
+        "target_reps": "8-12",
+        "equipment": "doorframe",
+        "instructions": "Stand in doorway, grip both sides of frame at chest height. Lean back with arms straight, feet close to door. Pull chest toward frame. Good for home with no bar.",
+        "progression_from": null,
+        "progression_to": "pull_inverted_high"
+      },
+      {
+        "id": "pull_inverted_low",
+        "name": "Inverted Row (Low Bar)",
+        "level": 2,
+        "muscles": [
+          "lats",
+          "rhomboids",
+          "rear_deltoid",
+          "biceps",
+          "core"
+        ],
+        "target_reps": "10-15",
+        "equipment": "low_bar_or_table_edge",
+        "instructions": "Bar at hip height, hang underneath with body nearly horizontal. Pull chest to bar. Lower with control. Lower bar and straighter body = harder.",
+        "progression_from": "pull_inverted_high",
+        "progression_to": null
+      },
+      {
+        "id": "pull_negative",
+        "name": "Negative Pull-up",
+        "level": 2,
+        "muscles": [
+          "lats",
+          "biceps",
+          "rear_deltoid",
+          "forearms",
+          "core"
+        ],
+        "target_reps": "3-5 x 4s descent",
+        "equipment": "pull_up_bar",
+        "instructions": "Jump or step to top of pull-up (chin over bar). Slowly lower yourself over 4-5 seconds to dead hang. Step back up and repeat. Builds eccentric strength for full pull-ups.",
+        "progression_from": "pull_scapular",
+        "progression_to": "pull_band_assisted"
+      },
+      {
+        "id": "pull_band_assisted",
+        "name": "Band-assisted Pull-up",
+        "level": 2,
+        "muscles": [
+          "lats",
+          "biceps",
+          "rear_deltoid",
+          "forearms",
+          "core"
+        ],
+        "target_reps": "6-10",
+        "equipment": "pull_up_bar, resistance_band",
+        "instructions": "Loop resistance band over bar, place foot or knee in band. Perform full pull-up with band assistance. Progress to thinner bands over time.",
+        "progression_from": "pull_negative",
+        "progression_to": "pull_full"
+      },
+      {
+        "id": "pull_full",
+        "name": "Pull-up",
+        "level": 3,
+        "muscles": [
+          "lats",
+          "biceps",
+          "rear_deltoid",
+          "forearms",
+          "core",
+          "rhomboids"
+        ],
+        "target_reps": "5-12",
+        "equipment": "pull_up_bar",
+        "instructions": "Overhand grip, shoulder-width or slightly wider. From dead hang, pull chin over bar. Lower with control to full extension. No kipping. Initiate with lats, not arms.",
+        "progression_from": "pull_band_assisted",
+        "progression_to": "pull_weighted"
+      },
+      {
+        "id": "pull_chinup",
+        "name": "Chin-up",
+        "level": 3,
+        "muscles": [
+          "biceps",
+          "lats",
+          "rear_deltoid",
+          "forearms",
+          "core"
+        ],
+        "target_reps": "6-12",
+        "equipment": "pull_up_bar",
+        "instructions": "Underhand (supinated) grip, shoulder-width. Pull chin over bar from dead hang. Emphasizes biceps more than overhand pull-up. Full range of motion.",
+        "progression_from": "pull_band_assisted",
+        "progression_to": "pull_weighted"
+      },
+      {
+        "id": "pull_wide",
+        "name": "Wide-grip Pull-up",
+        "level": 3,
+        "muscles": [
+          "lats",
+          "teres_major",
+          "rear_deltoid",
+          "biceps"
+        ],
+        "target_reps": "5-10",
+        "equipment": "pull_up_bar",
+        "instructions": "Overhand grip, hands wider than shoulder-width (1.5x). Pull chin over bar. Greater lat stretch and emphasis on width. Harder than standard pull-up.",
+        "progression_from": "pull_full",
+        "progression_to": "pull_archer"
+      },
+      {
+        "id": "pull_commando",
+        "name": "Commando Pull-up",
+        "level": 3,
+        "muscles": [
+          "lats",
+          "biceps",
+          "obliques",
+          "forearms",
+          "core"
+        ],
+        "target_reps": "5-8 per side",
+        "equipment": "pull_up_bar",
+        "instructions": "Stand perpendicular to bar, hands staggered (one in front of other). Pull one shoulder toward bar, alternating sides each rep. Works anti-rotation.",
+        "progression_from": "pull_full",
+        "progression_to": "pull_archer"
+      },
+      {
+        "id": "pull_weighted",
+        "name": "Weighted Pull-up",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "biceps",
+          "rear_deltoid",
+          "forearms",
+          "core",
+          "rhomboids"
+        ],
+        "target_reps": "3-6",
+        "equipment": "pull_up_bar, weight_belt_or_backpack",
+        "instructions": "Perform standard pull-up with added weight via dip belt, weighted vest, or backpack. Start with 5-10 lbs, progress gradually. Full ROM required.",
+        "progression_from": "pull_full",
+        "progression_to": null
+      },
+      {
+        "id": "pull_archer",
+        "name": "Archer Pull-up",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "biceps",
+          "rear_deltoid",
+          "core",
+          "forearms"
+        ],
+        "target_reps": "3-6 per side",
+        "equipment": "pull_up_bar",
+        "instructions": "Wide grip. Pull up toward one hand while the other arm extends straight along the bar. Lower with control. Alternate sides. Precursor to one-arm pull-up.",
+        "progression_from": "pull_wide",
+        "progression_to": "pull_onearm"
+      },
+      {
+        "id": "pull_lsit",
+        "name": "L-sit Pull-up",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "biceps",
+          "hip_flexors",
+          "core",
+          "rear_deltoid"
+        ],
+        "target_reps": "3-6",
+        "equipment": "pull_up_bar",
+        "instructions": "Hold legs parallel to floor in L-sit position while performing pull-up. Extreme core and hip flexor demand on top of pulling strength. Full ROM.",
+        "progression_from": "pull_full",
+        "progression_to": null
+      },
+      {
+        "id": "pull_onearm",
+        "name": "One-arm Pull-up",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "biceps",
+          "forearms",
+          "core",
+          "rear_deltoid",
+          "obliques"
+        ],
+        "target_reps": "1-3 per side",
+        "equipment": "pull_up_bar",
+        "instructions": "Hang from one arm, pull chin over bar. Pinnacle pulling strength. Train with assisted variations: archer, band-assisted one-arm, negatives. Avoid jerking.",
+        "progression_from": "pull_archer",
+        "progression_to": null
+      },
+      {
+        "id": "pull_muscleup",
+        "name": "Muscle-up",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "chest",
+          "triceps",
+          "biceps",
+          "core",
+          "anterior_deltoid"
+        ],
+        "target_reps": "3-5",
+        "equipment": "pull_up_bar_or_rings",
+        "instructions": "Explosive pull-up transitioning over the bar into a dip. Pull high (bar to chest), lean forward, press out to support. Requires both strong pull and push. False grip on rings helps.",
+        "progression_from": "pull_full",
+        "progression_to": null
+      }
+    ],
+    "legs": [
+      {
+        "id": "legs_bw_squat",
+        "name": "Bodyweight Squat",
+        "level": 1,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "core"
+        ],
+        "target_reps": "20-30",
+        "equipment": "none",
+        "instructions": "Feet shoulder-width, toes slightly out. Sit back and down until thighs parallel or below. Keep chest up, knees tracking over toes. Stand back up fully.",
+        "progression_from": null,
+        "progression_to": "legs_reverse_lunge"
+      },
+      {
+        "id": "legs_glute_bridge",
+        "name": "Glute Bridge",
+        "level": 1,
+        "muscles": [
+          "glutes",
+          "hamstrings",
+          "core"
+        ],
+        "target_reps": "15-20",
+        "equipment": "none",
+        "instructions": "Lie on back, knees bent, feet flat on floor. Drive hips up by squeezing glutes until body forms straight line from knees to shoulders. Lower with control.",
+        "progression_from": null,
+        "progression_to": "legs_single_glute_bridge"
+      },
+      {
+        "id": "legs_wall_sit",
+        "name": "Wall Sit",
+        "level": 1,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "core"
+        ],
+        "target_reps": "30-60s hold",
+        "equipment": "wall",
+        "instructions": "Back flat against wall, slide down until thighs parallel to floor. Knees at 90 degrees. Hold position. Builds isometric quad endurance.",
+        "progression_from": null,
+        "progression_to": null
+      },
+      {
+        "id": "legs_calf_raise",
+        "name": "Calf Raise",
+        "level": 1,
+        "muscles": [
+          "gastrocnemius",
+          "soleus"
+        ],
+        "target_reps": "15-25",
+        "equipment": "step_optional",
+        "instructions": "Stand with feet hip-width. Rise onto toes as high as possible, pause at top, lower with control. Use a step edge for greater range of motion.",
+        "progression_from": null,
+        "progression_to": "legs_single_calf_raise"
+      },
+      {
+        "id": "legs_reverse_lunge",
+        "name": "Reverse Lunge",
+        "level": 2,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "core"
+        ],
+        "target_reps": "15 per leg",
+        "equipment": "none",
+        "instructions": "Stand tall, step one foot backward into a lunge. Lower until both knees at ~90 degrees. Front knee over ankle. Push through front foot to return. Alternate legs.",
+        "progression_from": "legs_bw_squat",
+        "progression_to": "legs_bulgarian"
+      },
+      {
+        "id": "legs_bulgarian",
+        "name": "Bulgarian Split Squat",
+        "level": 2,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "core",
+          "hip_flexors"
+        ],
+        "target_reps": "10 per leg",
+        "equipment": "bench_or_chair",
+        "instructions": "Rear foot elevated on bench behind you. Lower until front thigh parallel to floor. Keep torso upright. Push through front heel to stand. Excellent unilateral developer.",
+        "progression_from": "legs_reverse_lunge",
+        "progression_to": "legs_pistol_neg"
+      },
+      {
+        "id": "legs_single_glute_bridge",
+        "name": "Single-leg Glute Bridge",
+        "level": 2,
+        "muscles": [
+          "glutes",
+          "hamstrings",
+          "core"
+        ],
+        "target_reps": "10 per leg",
+        "equipment": "none",
+        "instructions": "Lie on back, one foot flat on floor, other leg extended or held up. Drive hips up with single leg. Squeeze glute at top. Lower with control.",
+        "progression_from": "legs_glute_bridge",
+        "progression_to": null
+      },
+      {
+        "id": "legs_stepup",
+        "name": "Step-up",
+        "level": 2,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "calves"
+        ],
+        "target_reps": "12 per leg",
+        "equipment": "bench_or_box",
+        "instructions": "Stand facing bench. Step one foot onto bench, drive through that leg to stand on top. Step back down with control. Minimize push-off from trailing leg.",
+        "progression_from": "legs_bw_squat",
+        "progression_to": null
+      },
+      {
+        "id": "legs_walking_lunge",
+        "name": "Walking Lunge",
+        "level": 2,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "core"
+        ],
+        "target_reps": "10 per leg",
+        "equipment": "none",
+        "instructions": "Step forward into lunge, both knees at 90 degrees. Push off back foot and step into next lunge. Continue walking forward. Keep torso upright throughout.",
+        "progression_from": "legs_reverse_lunge",
+        "progression_to": null
+      },
+      {
+        "id": "legs_single_calf_raise",
+        "name": "Single-leg Calf Raise",
+        "level": 2,
+        "muscles": [
+          "gastrocnemius",
+          "soleus"
+        ],
+        "target_reps": "12-20 per leg",
+        "equipment": "step_optional",
+        "instructions": "Stand on one foot on a step edge. Lower heel below step level, then rise as high as possible. Hold wall for balance if needed. Full ROM each rep.",
+        "progression_from": "legs_calf_raise",
+        "progression_to": null
+      },
+      {
+        "id": "legs_jump_squat",
+        "name": "Jump Squat",
+        "level": 3,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "calves",
+          "core"
+        ],
+        "target_reps": "10-15",
+        "equipment": "none",
+        "instructions": "Squat down to parallel, then explode upward into a jump. Land softly with bent knees, immediately descend into next rep. Plyometric power builder.",
+        "progression_from": "legs_bw_squat",
+        "progression_to": null
+      },
+      {
+        "id": "legs_cossack_squat",
+        "name": "Cossack Squat",
+        "level": 3,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "adductors",
+          "hamstrings",
+          "hip_flexors"
+        ],
+        "target_reps": "6-8 per side",
+        "equipment": "none",
+        "instructions": "Wide stance. Shift weight to one leg and squat deep on that side while other leg extends straight. Heel stays down on working leg. Great for hip mobility and adductors.",
+        "progression_from": "legs_bw_squat",
+        "progression_to": null
+      },
+      {
+        "id": "legs_shrimp_squat",
+        "name": "Shrimp Squat Progression",
+        "level": 3,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "core"
+        ],
+        "target_reps": "5-8 per leg",
+        "equipment": "none",
+        "instructions": "Stand on one leg, grab opposite foot behind you. Squat down until rear knee touches floor. Stand back up. Use hand on wall for balance initially. Progress by removing support.",
+        "progression_from": "legs_bulgarian",
+        "progression_to": null
+      },
+      {
+        "id": "legs_pistol_neg",
+        "name": "Pistol Squat Negative",
+        "level": 3,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "core",
+          "hip_flexors"
+        ],
+        "target_reps": "3-5 per leg",
+        "equipment": "box_or_bench",
+        "instructions": "Stand on one leg at edge of box. Extend other leg forward. Slowly lower yourself (3-5 seconds) to seated on box. Use two legs to stand back up. Build eccentric strength for pistol.",
+        "progression_from": "legs_bulgarian",
+        "progression_to": "legs_pistol_full"
+      },
+      {
+        "id": "legs_pistol_full",
+        "name": "Pistol Squat (Full)",
+        "level": 4,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "hamstrings",
+          "core",
+          "hip_flexors",
+          "calves"
+        ],
+        "target_reps": "5-8 per leg",
+        "equipment": "none",
+        "instructions": "Stand on one leg, other leg extended forward. Squat all the way down until hamstring touches calf. Stand back up without assistance. Requires strength, balance, and ankle mobility.",
+        "progression_from": "legs_pistol_neg",
+        "progression_to": null
+      },
+      {
+        "id": "legs_nordic_curl",
+        "name": "Nordic Curl",
+        "level": 4,
+        "muscles": [
+          "hamstrings",
+          "glutes",
+          "calves"
+        ],
+        "target_reps": "3-6",
+        "equipment": "anchor_for_feet",
+        "instructions": "Kneel with feet anchored under sturdy object. Keeping hips extended, slowly lower torso toward floor using hamstrings to control descent. Push off floor to assist on the way up initially.",
+        "progression_from": "legs_single_glute_bridge",
+        "progression_to": null
+      },
+      {
+        "id": "legs_single_box_jump",
+        "name": "Single-leg Box Jump",
+        "level": 4,
+        "muscles": [
+          "quadriceps",
+          "glutes",
+          "calves",
+          "core"
+        ],
+        "target_reps": "3-5 per leg",
+        "equipment": "box_or_bench",
+        "instructions": "Stand on one leg facing a box. Explode upward and land on top of box on the same leg. Step down and repeat. Start with low box. Advanced plyometric exercise.",
+        "progression_from": "legs_jump_squat",
+        "progression_to": null
+      }
+    ],
+    "core": [
+      {
+        "id": "core_dead_bug",
+        "name": "Dead Bug",
+        "level": 1,
+        "muscles": [
+          "rectus_abdominis",
+          "transverse_abdominis",
+          "hip_flexors"
+        ],
+        "target_reps": "10 per side",
+        "equipment": "none",
+        "instructions": "Lie on back, arms extended toward ceiling, knees bent 90 degrees above hips. Extend opposite arm and leg toward floor, keeping lower back pressed to floor. Return and alternate.",
+        "progression_from": null,
+        "progression_to": "core_hollow_hold"
+      },
+      {
+        "id": "core_plank_knee",
+        "name": "Plank on Knees",
+        "level": 1,
+        "muscles": [
+          "rectus_abdominis",
+          "transverse_abdominis",
+          "core"
+        ],
+        "target_reps": "20-30s hold",
+        "equipment": "none",
+        "instructions": "Forearms on floor, knees on ground. Body straight from head to knees. Squeeze glutes and abs. Hold without sagging hips. Entry-level anti-extension exercise.",
+        "progression_from": null,
+        "progression_to": "core_plank"
+      },
+      {
+        "id": "core_plank",
+        "name": "Plank",
+        "level": 1,
+        "muscles": [
+          "rectus_abdominis",
+          "transverse_abdominis",
+          "obliques",
+          "erectors",
+          "glutes"
+        ],
+        "target_reps": "30-90s hold",
+        "equipment": "none",
+        "instructions": "Forearms and toes on floor, body rigid in straight line. Squeeze glutes, brace core, don't let hips sag or pike. Breathe steadily. Foundation anti-extension exercise.",
+        "progression_from": "core_plank_knee",
+        "progression_to": "core_hollow_hold"
+      },
+      {
+        "id": "core_crunch",
+        "name": "Crunch",
+        "level": 1,
+        "muscles": [
+          "rectus_abdominis"
+        ],
+        "target_reps": "15-20",
+        "equipment": "none",
+        "instructions": "Lie on back, knees bent, hands behind head (don't pull neck). Curl shoulders off floor by contracting abs. Lower with control. Short range of motion, focus on contraction.",
+        "progression_from": null,
+        "progression_to": "core_reverse_crunch"
+      },
+      {
+        "id": "core_side_plank",
+        "name": "Side Plank",
+        "level": 2,
+        "muscles": [
+          "obliques",
+          "transverse_abdominis",
+          "glutes",
+          "quadratus_lumborum"
+        ],
+        "target_reps": "30-60s per side",
+        "equipment": "none",
+        "instructions": "Lie on side, forearm on floor, feet stacked. Lift hips to form straight line from head to feet. Hold. Don't let hips drop. Train both sides equally.",
+        "progression_from": "core_plank",
+        "progression_to": null
+      },
+      {
+        "id": "core_hollow_hold",
+        "name": "Hollow Hold",
+        "level": 2,
+        "muscles": [
+          "rectus_abdominis",
+          "transverse_abdominis",
+          "hip_flexors",
+          "obliques"
+        ],
+        "target_reps": "20-60s hold",
+        "equipment": "none",
+        "instructions": "Lie on back. Press lower back into floor. Raise arms overhead and legs slightly off ground, creating a banana shape. Hold with lower back glued to floor. Key gymnastic position.",
+        "progression_from": "core_plank",
+        "progression_to": "core_hollow_rock"
+      },
+      {
+        "id": "core_reverse_crunch",
+        "name": "Reverse Crunch",
+        "level": 2,
+        "muscles": [
+          "rectus_abdominis",
+          "hip_flexors",
+          "obliques"
+        ],
+        "target_reps": "12-15",
+        "equipment": "none",
+        "instructions": "Lie on back, knees bent 90 degrees. Contract abs to curl hips off floor, bringing knees toward chest. Lower with control. Don't use momentum.",
+        "progression_from": "core_crunch",
+        "progression_to": "core_hanging_knee"
+      },
+      {
+        "id": "core_hanging_knee",
+        "name": "Hanging Knee Raise",
+        "level": 2,
+        "muscles": [
+          "rectus_abdominis",
+          "hip_flexors",
+          "obliques",
+          "forearms"
+        ],
+        "target_reps": "10-15",
+        "equipment": "pull_up_bar",
+        "instructions": "Hang from bar, arms straight. Raise bent knees toward chest by curling pelvis. Lower with control. Don't swing. Focus on posterior pelvic tilt at top.",
+        "progression_from": "core_reverse_crunch",
+        "progression_to": "core_hanging_leg"
+      },
+      {
+        "id": "core_bicycle_crunch",
+        "name": "Bicycle Crunch",
+        "level": 2,
+        "muscles": [
+          "rectus_abdominis",
+          "obliques",
+          "hip_flexors"
+        ],
+        "target_reps": "12-15 per side",
+        "equipment": "none",
+        "instructions": "Lie on back, hands behind head. Bring one knee to chest while rotating opposite elbow toward it. Extend that leg while switching sides. Controlled tempo, no yanking neck.",
+        "progression_from": "core_crunch",
+        "progression_to": null
+      },
+      {
+        "id": "core_leg_raise_lying",
+        "name": "Leg Raise (Lying)",
+        "level": 2,
+        "muscles": [
+          "rectus_abdominis",
+          "hip_flexors",
+          "core"
+        ],
+        "target_reps": "10-15",
+        "equipment": "none",
+        "instructions": "Lie on back, legs straight. Raise legs to 90 degrees keeping them straight. Lower slowly without touching floor. Keep lower back pressed down. Hands under hips for support if needed.",
+        "progression_from": null,
+        "progression_to": "core_hanging_leg"
+      },
+      {
+        "id": "core_hanging_leg",
+        "name": "Hanging Leg Raise",
+        "level": 3,
+        "muscles": [
+          "rectus_abdominis",
+          "hip_flexors",
+          "obliques",
+          "forearms"
+        ],
+        "target_reps": "8-12",
+        "equipment": "pull_up_bar",
+        "instructions": "Hang from bar, raise straight legs to 90 degrees or higher. Control the descent. Don't swing. Tilt pelvis posteriorly at top for maximum ab engagement.",
+        "progression_from": "core_hanging_knee",
+        "progression_to": "core_lsit_tuck"
+      },
+      {
+        "id": "core_lsit_tuck",
+        "name": "L-sit (Tucked)",
+        "level": 3,
+        "muscles": [
+          "rectus_abdominis",
+          "hip_flexors",
+          "triceps",
+          "core"
+        ],
+        "target_reps": "15-30s hold",
+        "equipment": "parallettes_or_floor",
+        "instructions": "Support body on hands (parallettes or floor), lift hips, tuck knees to chest. Hold with hips off ground. Build up hold time before extending legs.",
+        "progression_from": "core_hanging_leg",
+        "progression_to": "core_lsit_full"
+      },
+      {
+        "id": "core_hollow_rock",
+        "name": "Hollow Rock",
+        "level": 3,
+        "muscles": [
+          "rectus_abdominis",
+          "transverse_abdominis",
+          "hip_flexors",
+          "obliques"
+        ],
+        "target_reps": "15-20",
+        "equipment": "none",
+        "instructions": "From hollow hold position, gently rock forward and back like a rocking chair. Maintain hollow shape throughout. No breaking at the hips. Controlled, small amplitude.",
+        "progression_from": "core_hollow_hold",
+        "progression_to": "core_dragon_flag"
+      },
+      {
+        "id": "core_side_plank_adv",
+        "name": "Side Plank (Advanced)",
+        "level": 3,
+        "muscles": [
+          "obliques",
+          "transverse_abdominis",
+          "glutes",
+          "quadratus_lumborum"
+        ],
+        "target_reps": "20-45s per side",
+        "equipment": "none",
+        "instructions": "Standard side plank with top leg raised or top arm reaching overhead. Can also add hip dips for dynamic component. Increases oblique demand beyond basic side plank.",
+        "progression_from": "core_side_plank",
+        "progression_to": null
+      },
+      {
+        "id": "core_lsit_full",
+        "name": "Full L-sit",
+        "level": 4,
+        "muscles": [
+          "rectus_abdominis",
+          "hip_flexors",
+          "triceps",
+          "core",
+          "quadriceps"
+        ],
+        "target_reps": "20-40s hold",
+        "equipment": "parallettes_or_floor",
+        "instructions": "Support body on hands, lift hips, extend legs straight in front parallel to floor. Hold. Requires strong hip flexors, core compression, and tricep/shoulder support.",
+        "progression_from": "core_lsit_tuck",
+        "progression_to": null
+      },
+      {
+        "id": "core_dragon_flag",
+        "name": "Dragon Flag",
+        "level": 4,
+        "muscles": [
+          "rectus_abdominis",
+          "transverse_abdominis",
+          "obliques",
+          "hip_flexors",
+          "erectors"
+        ],
+        "target_reps": "3-5",
+        "equipment": "bench",
+        "instructions": "Lie on bench, grip behind head. Raise entire body (shoulders stay down) to vertical, then lower as a rigid plank until nearly horizontal. Only shoulder blades touch bench. Extreme anti-extension.",
+        "progression_from": "core_hollow_rock",
+        "progression_to": null
+      },
+      {
+        "id": "core_front_lever",
+        "name": "Front Lever",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "rectus_abdominis",
+          "core",
+          "rear_deltoid",
+          "rhomboids"
+        ],
+        "target_reps": "3-10s hold",
+        "equipment": "pull_up_bar_or_rings",
+        "instructions": "Hang from bar, raise body to horizontal position face-up with arms straight. Hold body parallel to floor. Progress through tuck, advanced tuck, straddle, full. Elite static hold.",
+        "progression_from": null,
+        "progression_to": null
+      }
+    ],
+    "skill": [
+      {
+        "id": "skill_wall_handstand",
+        "name": "Wall Handstand Hold",
+        "level": 2,
+        "muscles": [
+          "shoulders",
+          "core",
+          "triceps",
+          "trapezius",
+          "forearms"
+        ],
+        "target_reps": "15-30s hold",
+        "equipment": "wall",
+        "instructions": "Kick up or walk up to handstand facing wall (chest to wall preferred for alignment). Hold with arms locked, core tight, slight hollow body. Build time gradually.",
+        "progression_from": null,
+        "progression_to": "skill_freestanding_handstand"
+      },
+      {
+        "id": "skill_freestanding_handstand",
+        "name": "Freestanding Handstand",
+        "level": 3,
+        "muscles": [
+          "shoulders",
+          "core",
+          "triceps",
+          "trapezius",
+          "forearms",
+          "wrists"
+        ],
+        "target_reps": "5-15s hold",
+        "equipment": "none",
+        "instructions": "Kick up to handstand without wall. Balance using fingers and wrist adjustments. Hollow body position, arms locked, look between hands. Practice bail-out (pirouette or forward roll).",
+        "progression_from": "skill_wall_handstand",
+        "progression_to": null
+      },
+      {
+        "id": "skill_tuck_front_lever",
+        "name": "Tuck Front Lever",
+        "level": 3,
+        "muscles": [
+          "lats",
+          "core",
+          "rear_deltoid",
+          "rhomboids"
+        ],
+        "target_reps": "10-20s hold",
+        "equipment": "pull_up_bar_or_rings",
+        "instructions": "Hang from bar, pull body horizontal with knees tucked to chest. Back parallel to floor, arms straight. Hold. Progress to advanced tuck (hips more open).",
+        "progression_from": null,
+        "progression_to": "skill_full_front_lever"
+      },
+      {
+        "id": "skill_tuck_planche",
+        "name": "Tuck Planche",
+        "level": 3,
+        "muscles": [
+          "anterior_deltoid",
+          "chest",
+          "core",
+          "biceps",
+          "forearms"
+        ],
+        "target_reps": "5-15s hold",
+        "equipment": "parallettes_or_floor",
+        "instructions": "Support on hands, lean forward, lift feet off ground with knees tucked. Body horizontal, arms straight. Requires significant forward lean and shoulder protraction.",
+        "progression_from": null,
+        "progression_to": "skill_straddle_planche"
+      },
+      {
+        "id": "skill_frog_stand",
+        "name": "Frog Stand",
+        "level": 3,
+        "muscles": [
+          "anterior_deltoid",
+          "core",
+          "wrists",
+          "triceps"
+        ],
+        "target_reps": "10-20s hold",
+        "equipment": "none",
+        "instructions": "Squat down, hands on floor shoulder-width, knees resting on backs of upper arms. Lean forward and lift feet off ground. Balance on hands. Entry to hand-balancing.",
+        "progression_from": null,
+        "progression_to": "skill_tuck_planche"
+      },
+      {
+        "id": "skill_crow_pose",
+        "name": "Crow Pose",
+        "level": 3,
+        "muscles": [
+          "anterior_deltoid",
+          "core",
+          "wrists",
+          "triceps",
+          "chest"
+        ],
+        "target_reps": "5-15s hold",
+        "equipment": "none",
+        "instructions": "Similar to frog stand but arms straighter. Hands on floor, knees on backs of triceps, lean forward until feet lift. Slightly more demanding than frog stand.",
+        "progression_from": "skill_frog_stand",
+        "progression_to": "skill_tuck_planche"
+      },
+      {
+        "id": "skill_full_front_lever",
+        "name": "Full Front Lever",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "core",
+          "rear_deltoid",
+          "rhomboids",
+          "biceps"
+        ],
+        "target_reps": "3-10s hold",
+        "equipment": "pull_up_bar_or_rings",
+        "instructions": "Hang from bar, body fully extended and horizontal (face up), arms straight. Entire body parallel to floor. Requires extreme lat and core strength. Progress from tuck through straddle.",
+        "progression_from": "skill_tuck_front_lever",
+        "progression_to": null
+      },
+      {
+        "id": "skill_straddle_planche",
+        "name": "Straddle Planche",
+        "level": 4,
+        "muscles": [
+          "anterior_deltoid",
+          "chest",
+          "core",
+          "biceps",
+          "forearms",
+          "wrists"
+        ],
+        "target_reps": "3-10s hold",
+        "equipment": "parallettes_or_floor",
+        "instructions": "Body horizontal face-down, legs straddled wide, supported only on hands with arms straight. Extreme forward lean. Progress from tuck planche through advanced tuck.",
+        "progression_from": "skill_tuck_planche",
+        "progression_to": null
+      },
+      {
+        "id": "skill_full_muscleup",
+        "name": "Full Muscle-up",
+        "level": 4,
+        "muscles": [
+          "lats",
+          "chest",
+          "triceps",
+          "biceps",
+          "core",
+          "anterior_deltoid"
+        ],
+        "target_reps": "3-5",
+        "equipment": "pull_up_bar_or_rings",
+        "instructions": "Explosive pull transitioning over bar into dip support. Requires high pull, fast transition, and strong dip. False grip on rings recommended. Clean reps, no excessive kipping.",
+        "progression_from": "pull_full",
+        "progression_to": null
+      },
+      {
+        "id": "skill_human_flag",
+        "name": "Human Flag",
+        "level": 4,
+        "muscles": [
+          "obliques",
+          "lats",
+          "shoulders",
+          "core",
+          "grip"
+        ],
+        "target_reps": "3-10s hold",
+        "equipment": "vertical_pole_or_stall_bars",
+        "instructions": "Grip vertical pole with two hands (top hand overhand, bottom underhand). Push with bottom arm, pull with top arm to hold body horizontally sideways. Progress from tuck to straddle to full.",
+        "progression_from": null,
+        "progression_to": null
+      },
+      {
+        "id": "skill_skin_the_cat",
+        "name": "Skin the Cat",
+        "level": 4,
+        "muscles": [
+          "shoulders",
+          "lats",
+          "core",
+          "biceps",
+          "chest"
+        ],
+        "target_reps": "3-5",
+        "equipment": "rings_or_pull_up_bar",
+        "instructions": "Hang from rings, raise legs through arms into inverted hang, continue rotating backward into German hang (arms behind body). Reverse the motion. Excellent shoulder mobility and strength.",
+        "progression_from": null,
+        "progression_to": null
+      }
+    ],
+    "warmup": [
+      {
+        "id": "warmup_arm_circles",
+        "name": "Arm Circles",
+        "duration": "30s each direction",
+        "instructions": "Stand tall, extend arms to sides. Circle forward for 30s, then backward for 30s. Gradually increase circle size. Warms up shoulders and upper back."
+      },
+      {
+        "id": "warmup_cat_cow",
+        "name": "Cat-Cow",
+        "duration": "10 reps",
+        "instructions": "On all fours, alternate between arching back (cow: belly drops, chest lifts) and rounding back (cat: spine curves up, chin tucks). Flow with breath."
+      },
+      {
+        "id": "warmup_hip_circles",
+        "name": "Hip Circles",
+        "duration": "10 per side",
+        "instructions": "Stand on one leg, lift other knee to hip height. Circle the lifted leg outward, then inward. 10 each direction per side. Opens hip joints."
+      },
+      {
+        "id": "warmup_leg_swings",
+        "name": "Leg Swings",
+        "duration": "10 per leg",
+        "instructions": "Hold wall for balance. Swing one leg forward and back in controlled arc. Then do lateral swings (across body and out). Dynamic hamstring and hip flexor prep."
+      },
+      {
+        "id": "warmup_torso_twist",
+        "name": "Torso Twist",
+        "duration": "10 per side",
+        "instructions": "Stand with feet shoulder-width, arms extended or hands on shoulders. Rotate torso left and right. Keep hips stable. Warms thoracic spine."
+      },
+      {
+        "id": "warmup_jumping_jacks",
+        "name": "Jumping Jacks",
+        "duration": "1 min",
+        "instructions": "Classic jumping jacks to elevate heart rate. Jump feet wide while raising arms overhead, return to start. Steady pace for general warm-up."
+      },
+      {
+        "id": "warmup_wrist_rolls",
+        "name": "Wrist Rolls",
+        "duration": "30s",
+        "instructions": "Interlace fingers, circle wrists in both directions. Essential before any hand-balancing or push-up work. Prevents wrist strain."
+      },
+      {
+        "id": "warmup_yuri_shoulder",
+        "name": "Yuri's Shoulder Band Warmup",
+        "duration": "5-10 reps",
+        "instructions": "With a band or towel held wide, pass it overhead and behind the back, then return. From BWF RR. Warms rotator cuff and improves shoulder mobility."
+      },
+      {
+        "id": "warmup_squat_sky_reach",
+        "name": "Squat Sky Reaches",
+        "duration": "5-10 reps",
+        "instructions": "Squat down, place one hand on floor, reach other arm to ceiling rotating torso. Alternate sides. Opens thoracic spine and warms hips simultaneously."
+      },
+      {
+        "id": "warmup_gmb_wrist",
+        "name": "GMB Wrist Prep",
+        "duration": "10+ reps each position",
+        "instructions": "On all fours, fingers forward: rock forward and back. Fingers backward: rock gently. Fingers outward: rock side to side. Backs of hands: gentle pressure. From BWF RR warmup.",
+        "source": "bwf_rr"
+      },
+      {
+        "id": "warmup_deadbugs",
+        "name": "Deadbugs (Warmup)",
+        "duration": "30s",
+        "instructions": "Lie on back, arms up, knees bent 90 degrees. Alternate extending opposite arm and leg while maintaining lower back contact with floor. Light core activation for warmup."
+      }
+    ],
+    "cooldown": [
+      {
+        "id": "cooldown_child_pose",
+        "name": "Child's Pose",
+        "duration": "30s",
+        "instructions": "Kneel, sit back on heels, extend arms forward on floor. Rest forehead on ground. Breathe deeply. Stretches lats, shoulders, and lower back."
+      },
+      {
+        "id": "cooldown_downward_dog",
+        "name": "Downward Dog",
+        "duration": "30s",
+        "instructions": "Inverted V position: hands and feet on floor, hips high, heels pressing toward ground. Pedal feet gently. Stretches hamstrings, calves, shoulders."
+      },
+      {
+        "id": "cooldown_pigeon_pose",
+        "name": "Pigeon Pose",
+        "duration": "30s per side",
+        "instructions": "From all fours, bring one knee forward behind same-side wrist, extend other leg back. Lower hips toward floor. Fold forward for deeper stretch. Deep hip flexor and glute stretch."
+      },
+      {
+        "id": "cooldown_hamstring_stretch",
+        "name": "Hamstring Stretch",
+        "duration": "30s per leg",
+        "instructions": "Stand, place one heel on low surface with leg straight. Hinge at hips, reach toward toes. Keep back straight. Feel stretch behind thigh. Can also do seated."
+      },
+      {
+        "id": "cooldown_quad_stretch",
+        "name": "Quad Stretch",
+        "duration": "30s per leg",
+        "instructions": "Stand on one leg, grab opposite ankle behind you, pull heel toward glute. Keep knees together, hips pushed forward. Hold wall for balance if needed."
+      },
+      {
+        "id": "cooldown_chest_stretch",
+        "name": "Chest Stretch",
+        "duration": "30s",
+        "instructions": "Stand in doorway, forearm on frame at 90 degrees. Step through and lean until stretch felt in chest and front of shoulder. Can do both arms in wide doorway."
+      },
+      {
+        "id": "cooldown_triceps_stretch",
+        "name": "Triceps Stretch",
+        "duration": "30s per arm",
+        "instructions": "Raise one arm overhead, bend elbow so hand reaches behind head toward opposite shoulder blade. Use other hand to gently press elbow. Feel stretch in back of arm."
+      },
+      {
+        "id": "cooldown_lat_stretch",
+        "name": "Lat Stretch",
+        "duration": "30s per side",
+        "instructions": "Grab doorframe or pole overhead with one hand. Step away and lean hips away from hand, creating a side bend. Feel stretch along side of torso and lat."
+      }
+    ]
+  },
+  "progression_paths": {
+    "push_horizontal": [
+      "push_wall",
+      "push_incline",
+      "push_knee",
+      "push_standard",
+      "push_diamond",
+      "push_decline",
+      "push_archer",
+      "push_onearm"
+    ],
+    "push_vertical": [
+      "push_pike",
+      "push_elevated_pike",
+      "push_wall_hspu",
+      "push_freestanding_hspu"
+    ],
+    "pull_vertical": [
+      "pull_dead_hang",
+      "pull_scapular",
+      "pull_negative",
+      "pull_band_assisted",
+      "pull_full",
+      "pull_weighted",
+      "pull_archer",
+      "pull_onearm"
+    ],
+    "pull_horizontal": [
+      "pull_inverted_high",
+      "pull_inverted_low"
+    ],
+    "squat": [
+      "legs_bw_squat",
+      "legs_bulgarian",
+      "legs_pistol_neg",
+      "legs_pistol_full"
+    ],
+    "hinge": [
+      "legs_glute_bridge",
+      "legs_single_glute_bridge",
+      "legs_nordic_curl"
+    ],
+    "core_anti_extension": [
+      "core_plank_knee",
+      "core_plank",
+      "core_hollow_hold",
+      "core_hollow_rock",
+      "core_dragon_flag"
+    ],
+    "core_compression": [
+      "core_hanging_knee",
+      "core_hanging_leg",
+      "core_lsit_tuck",
+      "core_lsit_full"
+    ]
+  },
+  "templates": {
+    "beginner_fullbody_3x": {
+      "name": "Beginner Full Body 3x/Week",
+      "description": "Based on BWF Recommended Routine and GymnaseTips beginner plan. Full body circuit with A/B alternating days.",
+      "frequency": "3x per week",
+      "schedule": [
+        "Monday",
+        "Wednesday",
+        "Friday"
+      ],
+      "rest_between_sets": "60-90s",
+      "tempo": "2-0-1 (2s down, 0 pause, 1s up)",
+      "sets_per_exercise": 3,
+      "structure": "paired_supersets",
+      "warmup_ref": "warmup",
+      "cooldown_ref": "cooldown",
+      "graduation_criteria": {
+        "push_ups": 15,
+        "pull_ups": 5,
+        "squats": 20,
+        "note": "When all criteria met with good form, move to intermediate template"
+      },
+      "day_a": {
+        "name": "Full Body A",
+        "exercises": [
+          {
+            "exercise_id": "push_standard",
+            "sets": 3,
+            "reps": "5-8",
+            "note": "Use current push progression level"
+          },
+          {
+            "exercise_id": "pull_full",
+            "sets": 3,
+            "reps": "5-8",
+            "note": "Use current pull progression level"
+          },
+          {
+            "exercise_id": "legs_bw_squat",
+            "sets": 3,
+            "reps": "8-15",
+            "note": "Use current squat progression level"
+          },
+          {
+            "exercise_id": "core_plank",
+            "sets": 3,
+            "reps": "30-60s",
+            "note": "Use current core progression level"
+          },
+          {
+            "exercise_id": "legs_glute_bridge",
+            "sets": 3,
+            "reps": "10-15",
+            "note": "Use current hinge progression level"
+          },
+          {
+            "exercise_id": "push_pike",
+            "sets": 3,
+            "reps": "5-8",
+            "note": "Vertical push practice"
+          }
+        ]
+      },
+      "day_b": {
+        "name": "Full Body B",
+        "exercises": [
+          {
+            "exercise_id": "push_diamond",
+            "sets": 3,
+            "reps": "5-8",
+            "note": "Use current push progression level"
+          },
+          {
+            "exercise_id": "pull_inverted_high",
+            "sets": 3,
+            "reps": "8-12",
+            "note": "Use current horizontal pull level"
+          },
+          {
+            "exercise_id": "legs_reverse_lunge",
+            "sets": 3,
+            "reps": "8-12 per leg",
+            "note": "Use current squat progression level"
+          },
+          {
+            "exercise_id": "core_dead_bug",
+            "sets": 3,
+            "reps": "10 per side",
+            "note": "Use current core progression level"
+          },
+          {
+            "exercise_id": "legs_calf_raise",
+            "sets": 3,
+            "reps": "15-20",
+            "note": "Calf work"
+          },
+          {
+            "exercise_id": "push_bench_dip",
+            "sets": 3,
+            "reps": "8-12",
+            "note": "Dip progression practice"
+          }
+        ]
+      }
+    },
+    "intermediate_ppl_4x": {
+      "name": "Intermediate Push/Pull/Legs + Upper 4x/Week",
+      "description": "Push/Pull/Legs split with additional upper body day. 10-15 hard sets per muscle group per week.",
+      "frequency": "4x per week",
+      "schedule": [
+        "Monday",
+        "Tuesday",
+        "Thursday",
+        "Friday"
+      ],
+      "rest_between_sets": "90-120s",
+      "tempo": "2-0-1-0",
+      "sets_per_exercise": "3-4",
+      "weekly_volume": "10-15 hard sets per muscle group",
+      "graduation_criteria": {
+        "push_ups": 25,
+        "pull_ups": 10,
+        "pistol_squat_negatives": true,
+        "note": "When all criteria met, move to advanced template"
+      },
+      "day_push": {
+        "name": "Push Day",
+        "exercises": [
+          {
+            "exercise_id": "push_parallel_dip",
+            "sets": 4,
+            "reps": "6-10"
+          },
+          {
+            "exercise_id": "push_standard",
+            "sets": 3,
+            "reps": "8-12"
+          },
+          {
+            "exercise_id": "push_diamond",
+            "sets": 3,
+            "reps": "8-12"
+          },
+          {
+            "exercise_id": "push_elevated_pike",
+            "sets": 4,
+            "reps": "6-10"
+          },
+          {
+            "exercise_id": "push_pseudo_planche",
+            "sets": 3,
+            "reps": "5-8"
+          }
+        ]
+      },
+      "day_pull": {
+        "name": "Pull Day",
+        "exercises": [
+          {
+            "exercise_id": "pull_full",
+            "sets": 4,
+            "reps": "5-8"
+          },
+          {
+            "exercise_id": "pull_chinup",
+            "sets": 3,
+            "reps": "6-10"
+          },
+          {
+            "exercise_id": "pull_wide",
+            "sets": 3,
+            "reps": "5-8"
+          },
+          {
+            "exercise_id": "pull_inverted_low",
+            "sets": 3,
+            "reps": "8-12"
+          },
+          {
+            "exercise_id": "core_hanging_leg",
+            "sets": 3,
+            "reps": "8-12"
+          }
+        ]
+      },
+      "day_legs": {
+        "name": "Legs Day",
+        "exercises": [
+          {
+            "exercise_id": "legs_bulgarian",
+            "sets": 4,
+            "reps": "8-10 per leg"
+          },
+          {
+            "exercise_id": "legs_pistol_neg",
+            "sets": 3,
+            "reps": "3-5 per leg"
+          },
+          {
+            "exercise_id": "legs_cossack_squat",
+            "sets": 3,
+            "reps": "6-8 per side"
+          },
+          {
+            "exercise_id": "legs_nordic_curl",
+            "sets": 3,
+            "reps": "3-6"
+          },
+          {
+            "exercise_id": "legs_single_calf_raise",
+            "sets": 3,
+            "reps": "12-15 per leg"
+          },
+          {
+            "exercise_id": "core_hollow_rock",
+            "sets": 3,
+            "reps": "15-20"
+          }
+        ]
+      },
+      "day_upper": {
+        "name": "Upper Body Day",
+        "exercises": [
+          {
+            "exercise_id": "push_decline",
+            "sets": 3,
+            "reps": "8-12"
+          },
+          {
+            "exercise_id": "pull_commando",
+            "sets": 3,
+            "reps": "5-8 per side"
+          },
+          {
+            "exercise_id": "push_wall_hspu",
+            "sets": 3,
+            "reps": "3-6"
+          },
+          {
+            "exercise_id": "pull_full",
+            "sets": 3,
+            "reps": "6-10"
+          },
+          {
+            "exercise_id": "core_lsit_tuck",
+            "sets": 3,
+            "reps": "15-30s hold"
+          }
+        ]
+      }
+    },
+    "advanced_skill_5x": {
+      "name": "Advanced Skill + Strength 5x/Week (12-Week Block)",
+      "description": "12-week periodized block with 3 phases: accumulation, intensification, and realization. Skill work + heavy strength. Deload at week 8.",
+      "frequency": "4-5x per week",
+      "schedule": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Friday",
+        "Saturday"
+      ],
+      "block_duration_weeks": 12,
+      "deload_week": 8,
+      "phases": {
+        "accumulation": {
+          "weeks": "1-4",
+          "focus": "Volume building",
+          "sets": "4-5 per exercise",
+          "reps": "8-12 for strength, max holds for skills",
+          "intensity": "RIR 2-3",
+          "description": "Build work capacity. Higher reps, moderate intensity. Introduce skill positions with tuck variations."
+        },
+        "intensification": {
+          "weeks": "5-8",
+          "focus": "Strength peaking",
+          "sets": "3-4 per exercise",
+          "reps": "3-6 for strength, extending skill holds",
+          "intensity": "RIR 1-2",
+          "deload_note": "Week 8 is deload: 50% volume, same intensity",
+          "description": "Harder progressions, lower reps, higher difficulty. Push skill holds toward straddle/advanced tuck. Week 8 deload."
+        },
+        "realization": {
+          "weeks": "9-12",
+          "focus": "Peak performance and skill testing",
+          "sets": "3 per exercise",
+          "reps": "1-5 for strength, max attempts for skills",
+          "intensity": "RIR 0-1",
+          "description": "Test new PRs. Full skill attempts. Reduced volume, maximum intensity. Showcase phase."
+        }
+      },
+      "day_skill": {
+        "name": "Skill Day (Mon/Wed)",
+        "exercises": [
+          {
+            "exercise_id": "skill_freestanding_handstand",
+            "sets": 5,
+            "reps": "max hold attempts",
+            "note": "Primary skill focus"
+          },
+          {
+            "exercise_id": "skill_tuck_planche",
+            "sets": 4,
+            "reps": "10-15s hold"
+          },
+          {
+            "exercise_id": "skill_tuck_front_lever",
+            "sets": 4,
+            "reps": "10-15s hold"
+          },
+          {
+            "exercise_id": "skill_skin_the_cat",
+            "sets": 3,
+            "reps": "3-5",
+            "note": "Shoulder mobility and strength"
+          },
+          {
+            "exercise_id": "core_lsit_full",
+            "sets": 3,
+            "reps": "max hold"
+          }
+        ]
+      },
+      "day_push_strength": {
+        "name": "Push Strength (Tue)",
+        "exercises": [
+          {
+            "exercise_id": "push_wall_hspu",
+            "sets": 4,
+            "reps": "3-6"
+          },
+          {
+            "exercise_id": "push_parallel_dip",
+            "sets": 4,
+            "reps": "6-10"
+          },
+          {
+            "exercise_id": "push_pseudo_planche",
+            "sets": 3,
+            "reps": "5-8"
+          },
+          {
+            "exercise_id": "push_archer",
+            "sets": 3,
+            "reps": "5-8 per side"
+          },
+          {
+            "exercise_id": "core_dragon_flag",
+            "sets": 3,
+            "reps": "3-5"
+          }
+        ]
+      },
+      "day_pull_strength": {
+        "name": "Pull Strength (Fri)",
+        "exercises": [
+          {
+            "exercise_id": "pull_weighted",
+            "sets": 4,
+            "reps": "3-6"
+          },
+          {
+            "exercise_id": "pull_archer",
+            "sets": 3,
+            "reps": "3-5 per side"
+          },
+          {
+            "exercise_id": "pull_lsit",
+            "sets": 3,
+            "reps": "3-5"
+          },
+          {
+            "exercise_id": "pull_muscleup",
+            "sets": 3,
+            "reps": "3-5"
+          },
+          {
+            "exercise_id": "core_hanging_leg",
+            "sets": 3,
+            "reps": "8-12"
+          }
+        ]
+      },
+      "day_legs_strength": {
+        "name": "Legs + Core (Sat)",
+        "exercises": [
+          {
+            "exercise_id": "legs_pistol_full",
+            "sets": 4,
+            "reps": "5-8 per leg"
+          },
+          {
+            "exercise_id": "legs_nordic_curl",
+            "sets": 4,
+            "reps": "3-6"
+          },
+          {
+            "exercise_id": "legs_cossack_squat",
+            "sets": 3,
+            "reps": "6-8 per side"
+          },
+          {
+            "exercise_id": "legs_single_box_jump",
+            "sets": 3,
+            "reps": "3-5 per leg"
+          },
+          {
+            "exercise_id": "core_front_lever",
+            "sets": 3,
+            "reps": "max hold"
+          }
+        ]
+      }
+    }
+  },
+  "self_test": {
+    "how": "Do max reps of: strict push-ups, dead-hang pull-ups, full-depth bodyweight squats. Rest fully between tests (3-5 minutes). Lowest result sets your tier.",
+    "beginner": "< 5 push-ups OR 0 pull-ups OR < 10 squats",
+    "intermediate": "15+ push-ups AND 5+ pull-ups AND 20+ squats",
+    "advanced": "25+ push-ups AND 10+ pull-ups AND solid pistol squat negatives",
+    "scoring": {
+      "push_ups": {
+        "beginner_max": 4,
+        "intermediate_min": 15,
+        "advanced_min": 25
+      },
+      "pull_ups": {
+        "beginner_max": 0,
+        "intermediate_min": 5,
+        "advanced_min": 10
+      },
+      "squats": {
+        "beginner_max": 9,
+        "intermediate_min": 20,
+        "advanced_min": 20
+      },
+      "pistol_squat_negatives": {
+        "advanced_required": true
+      }
+    },
+    "template_mapping": {
+      "beginner": "beginner_fullbody_3x",
+      "intermediate": "intermediate_ppl_4x",
+      "advanced": "advanced_skill_5x"
+    }
+  },
+  "plateau_decision_tree": {
+    "pushup": {
+      "below_10_reps": "Add tempo (3s eccentric) for 2 weeks. If stalled, drop to easier variation, rebuild volume.",
+      "15_to_25_reps": "Stop chasing reps. Switch to harder variation: feet-elevated → archer → pseudo-planche.",
+      "above_25_reps": "Add load (backpack) and treat as weighted set of 6-10."
+    },
+    "pullup": {
+      "below_5_reps": "Use negatives: jump to top, lower 5s, 3-4 sets.",
+      "8_to_12_reps": "Add weight (5-10 lb) and work 5-8 rep range, or switch to archer/commando.",
+      "grip_failing": "Add dead hangs and farmer holds 2x/week."
+    },
+    "squat": {
+      "above_25_reps": "Move to single-leg work: split squats → pistol progressions.",
+      "stuck_on_pistol_neg": "Fix ankle mobility or balance first. Elevate heel or hold support.",
+      "strong_no_pistol": "Box pistols to progressively lower surface."
+    }
+  },
+  "nutrition": {
+    "sources": [
+      {
+        "name": "ISSN Position Stand on Protein and Exercise",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5477153/",
+        "year": 2017,
+        "key_finding": "1.4-2.0 g protein/kg/day for exercising individuals; up to 2.2 g/kg for maximizing MPS"
+      },
+      {
+        "name": "The Workout Mag - Science-Backed Calisthenics Diet",
+        "url": "https://theworkoutmag.com/training/science-backed-calisthenics-diet-macros-timing",
+        "year": 2026,
+        "key_finding": "Phase-specific macros for calisthenics: skill/hypertrophy/fat-loss phases differ"
+      },
+      {
+        "name": "Mifflin-St Jeor BMR Equation (American Journal of Clinical Nutrition)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2305711/",
+        "year": 1990,
+        "key_finding": "Most accurate weight-based BMR formula, ±10% error for 82% non-obese subjects"
+      },
+      {
+        "name": "CDC - Steps for Losing Weight",
+        "url": "https://www.cdc.gov/healthy-weight-growth/losing-weight/index.html",
+        "year": 2025,
+        "key_finding": "Safe rate: 0.5-1 kg (1-2 lbs) per week, deficit 500-1000 kcal/day"
+      },
+      {
+        "name": "NASM - Nutrient Timing for Workouts",
+        "url": "https://blog.nasm.org/workout-and-nutrition-timing",
+        "year": 2024,
+        "key_finding": "Mixed meal 2-4 hours pre-training; 20-40g protein within 2 hours post-workout"
+      },
+      {
+        "name": "Schoenfeld et al. - Dose-Response Relationship Between Protein and Muscle Hypertrophy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28698222/",
+        "year": 2018,
+        "key_finding": "1.6 g/kg/day is the breakpoint; gains plateau after 2.2 g/kg/day"
+      }
+    ],
+    "bmr_formula": {
+      "name": "Mifflin-St Jeor",
+      "accuracy": "±10% for 82% non-obese subjects, most accurate weight-based formula",
+      "male": "BMR = 10 × weight_kg + 6.25 × height_cm - 5 × age + 5",
+      "female": "BMR = 10 × weight_kg + 6.25 × height_cm - 5 × age - 161"
+    },
+    "activity_multipliers": {
+      "sedentary": {
+        "multiplier": 1.2,
+        "description": "Duduk sepanjang hari, tidak olahraga"
+      },
+      "light": {
+        "multiplier": 1.375,
+        "description": "Olahraga ringan 1-3x/minggu"
+      },
+      "moderate": {
+        "multiplier": 1.55,
+        "description": "Olahraga sedang 3-5x/minggu"
+      },
+      "active": {
+        "multiplier": 1.725,
+        "description": "Olahraga berat 6-7x/minggu"
+      },
+      "very_active": {
+        "multiplier": 1.9,
+        "description": "Olahraga sangat berat / pekerjaan fisik"
+      }
+    },
+    "calorie_targets": {
+      "fat_loss": {
+        "deficit_kcal": 500,
+        "max_deficit_kcal": 1000,
+        "safe_rate_kg_per_week": "0.5 - 1.0",
+        "min_intake_male_kcal": 1500,
+        "min_intake_female_kcal": 1200,
+        "note": "Jangan turun di bawah minimum intake — berisiko kehilangan otot dan metabolic adaptation (CDC, NHS)"
+      },
+      "maintenance": {
+        "description": "TDEE = BMR × activity_multiplier. Makan sesuai TDEE untuk mempertahankan berat."
+      },
+      "muscle_gain": {
+        "surplus_kcal": 300,
+        "max_surplus_kcal": 500,
+        "expected_gain_kg_per_month": "0.5 - 1.0 (beginner), 0.25 - 0.5 (intermediate)",
+        "note": "Surplus terlalu besar = lebih banyak lemak, bukan otot"
+      }
+    },
+    "macros_by_goal": {
+      "fat_loss": {
+        "protein_g_per_kg": {
+          "min": 2.0,
+          "max": 2.4
+        },
+        "carbs_g_per_kg": {
+          "min": 2.0,
+          "max": 3.5
+        },
+        "fat_g_per_kg": {
+          "min": 0.8,
+          "max": 1.0
+        },
+        "note": "Protein tinggi saat deficit untuk cegah kehilangan otot (ISSN)"
+      },
+      "muscle_gain": {
+        "protein_g_per_kg": {
+          "min": 1.6,
+          "max": 2.2
+        },
+        "carbs_g_per_kg": {
+          "min": 3.0,
+          "max": 5.0
+        },
+        "fat_g_per_kg": {
+          "min": 1.0,
+          "max": 1.5
+        },
+        "note": "Carbs lebih tinggi untuk fuel hypertrophy training"
+      },
+      "maintenance": {
+        "protein_g_per_kg": {
+          "min": 1.4,
+          "max": 2.0
+        },
+        "carbs_g_per_kg": {
+          "min": 3.0,
+          "max": 5.0
+        },
+        "fat_g_per_kg": {
+          "min": 0.8,
+          "max": 1.2
+        },
+        "note": "Balanced macros untuk maintain body composition"
+      },
+      "skill_focus": {
+        "protein_g_per_kg": {
+          "min": 1.8,
+          "max": 2.2
+        },
+        "carbs_g_per_kg": {
+          "min": 5.0,
+          "max": 7.0
+        },
+        "fat_g_per_kg": {
+          "min": 0.8,
+          "max": 1.2
+        },
+        "note": "Carbs sangat tinggi untuk fuel CNS & glycogen saat skill training (The Workout Mag)"
+      }
+    },
+    "meal_timing": {
+      "pre_workout": {
+        "timing": "1-3 jam sebelum workout",
+        "protein_g": "20-30",
+        "carbs": "Karbohidrat kompleks (nasi, oat, roti gandum)",
+        "fat": "Rendah lemak (hindari gorengan)",
+        "example_meals": [
+          "Nasi putih 150g + ayam dada panggang 120g",
+          "Oat 60g + pisang + 1 scoop whey protein",
+          "Roti gandum 2 lembar + telur 2 butir",
+          "Nasi + tempe goreng (sedikit minyak) + sayur"
+        ]
+      },
+      "post_workout": {
+        "timing": "Dalam 2 jam setelah workout",
+        "protein_g": "20-40",
+        "carbs": "Karbohidrat cepat serap (nasi, pisang, roti)",
+        "note": "Protein + carbs untuk recovery otot & refill glycogen",
+        "example_meals": [
+          "Nasi putih 200g + ayam dada 150g + sayur",
+          "Smoothie: pisang + susu + whey protein + oat",
+          "Nasi + telur 3 butir + tempe + sambal",
+          "Nasi goreng (sedikit minyak) + ayam + telur"
+        ]
+      },
+      "general": {
+        "meal_frequency": "3-5 kali makan/hari",
+        "protein_distribution": "Bagi protein merata di setiap makan (25-40g per meal)",
+        "hydration": "Minimal 2-3 liter air/hari, tambah 500ml per jam workout",
+        "note": "Meal timing kurang penting dibanding total kalori & protein harian (ISSN)"
+      }
+    },
+    "bmi_categories": {
+      "underweight": {
+        "range": "< 18.5",
+        "recommendation": "Surplus kalori 300-500 kcal, fokus muscle gain"
+      },
+      "normal": {
+        "range": "18.5 - 24.9",
+        "recommendation": "Maintenance atau lean bulk (+300 kcal)"
+      },
+      "overweight": {
+        "range": "25.0 - 29.9",
+        "recommendation": "Deficit 500 kcal, prioritas fat loss sambil strength training"
+      },
+      "obese": {
+        "range": "≥ 30.0",
+        "recommendation": "Deficit 500-750 kcal, konsultasi dokter, prioritas kesehatan"
+      }
+    },
+    "sample_meal_plans": {
+      "fat_loss_1700kcal": {
+        "target_kcal": 1700,
+        "target_protein_g": 150,
+        "target_carbs_g": 170,
+        "target_fat_g": 50,
+        "meals": [
+          {
+            "meal": "Sarapan (07:00)",
+            "items": [
+              "Oat 50g",
+              "Telur rebus 2 butir",
+              "Pisang 1 buah"
+            ],
+            "approx_kcal": 400,
+            "approx_protein_g": 25
+          },
+          {
+            "meal": "Makan Siang (12:00)",
+            "items": [
+              "Nasi putih 150g",
+              "Ayam dada panggang 150g",
+              "Sayur bening",
+              "Tempe 50g"
+            ],
+            "approx_kcal": 550,
+            "approx_protein_g": 50
+          },
+          {
+            "meal": "Snack Pre-Workout (15:00)",
+            "items": [
+              "Roti gandum 1 lembar",
+              "Selai kacang 1 sdm",
+              "Pisang 1 buah"
+            ],
+            "approx_kcal": 250,
+            "approx_protein_g": 8
+          },
+          {
+            "meal": "Makan Malam (19:00)",
+            "items": [
+              "Nasi putih 100g",
+              "Ikan bakar 150g",
+              "Tahu 100g",
+              "Sayur kangkung"
+            ],
+            "approx_kcal": 450,
+            "approx_protein_g": 45
+          },
+          {
+            "meal": "Snack Malam (21:00)",
+            "items": [
+              "Greek yogurt 150g atau susu rendah lemak 250ml"
+            ],
+            "approx_kcal": 100,
+            "approx_protein_g": 15
+          }
+        ]
+      },
+      "muscle_gain_2500kcal": {
+        "target_kcal": 2500,
+        "target_protein_g": 160,
+        "target_carbs_g": 300,
+        "target_fat_g": 75,
+        "meals": [
+          {
+            "meal": "Sarapan (07:00)",
+            "items": [
+              "Nasi goreng telur 2 butir",
+              "Tempe goreng 50g",
+              "Susu 250ml"
+            ],
+            "approx_kcal": 600,
+            "approx_protein_g": 30
+          },
+          {
+            "meal": "Snack Pagi (10:00)",
+            "items": [
+              "Pisang 2 buah",
+              "Kacang tanah 30g"
+            ],
+            "approx_kcal": 300,
+            "approx_protein_g": 10
+          },
+          {
+            "meal": "Makan Siang (12:30)",
+            "items": [
+              "Nasi putih 200g",
+              "Ayam dada 200g",
+              "Tahu/tempe 100g",
+              "Sayur"
+            ],
+            "approx_kcal": 700,
+            "approx_protein_g": 55
+          },
+          {
+            "meal": "Pre-Workout (15:00)",
+            "items": [
+              "Oat 50g",
+              "Pisang 1 buah",
+              "Madu 1 sdm"
+            ],
+            "approx_kcal": 300,
+            "approx_protein_g": 8
+          },
+          {
+            "meal": "Makan Malam (19:00)",
+            "items": [
+              "Nasi putih 200g",
+              "Ikan/daging 150g",
+              "Telur 2 butir",
+              "Sayur"
+            ],
+            "approx_kcal": 650,
+            "approx_protein_g": 50
+          }
+        ]
+      }
+    },
+    "protein_sources_indonesia": {
+      "murah": [
+        {
+          "name": "Telur ayam",
+          "protein_per_100g": 13,
+          "price_approx_idr": "2.500/butir"
+        },
+        {
+          "name": "Tempe",
+          "protein_per_100g": 19,
+          "price_approx_idr": "3.000-5.000/bungkus"
+        },
+        {
+          "name": "Tahu",
+          "protein_per_100g": 8,
+          "price_approx_idr": "2.000-3.000/bungkus"
+        },
+        {
+          "name": "Kacang tanah",
+          "protein_per_100g": 26,
+          "price_approx_idr": "15.000/500g"
+        },
+        {
+          "name": "Susu sapi murni",
+          "protein_per_100ml": 3.4,
+          "price_approx_idr": "10.000/liter"
+        },
+        {
+          "name": "Ikan lele",
+          "protein_per_100g": 18,
+          "price_approx_idr": "25.000/kg"
+        },
+        {
+          "name": "Ayam kampung (dada)",
+          "protein_per_100g": 27,
+          "price_approx_idr": "35.000/kg"
+        }
+      ],
+      "sedang": [
+        {
+          "name": "Ayam broiler (dada)",
+          "protein_per_100g": 31,
+          "price_approx_idr": "35.000/kg"
+        },
+        {
+          "name": "Ikan nila",
+          "protein_per_100g": 20,
+          "price_approx_idr": "30.000/kg"
+        },
+        {
+          "name": "Daging sapi (has dalam)",
+          "protein_per_100g": 26,
+          "price_approx_idr": "130.000/kg"
+        },
+        {
+          "name": "Udang",
+          "protein_per_100g": 24,
+          "price_approx_idr": "60.000/kg"
+        },
+        {
+          "name": "Greek yogurt",
+          "protein_per_100g": 10,
+          "price_approx_idr": "15.000/150g"
+        }
+      ],
+      "note": "Harga perkiraan 2026, bisa beda tiap daerah. Telur + tempe + tahu = combo paling murah & efektif."
+    },
+    "hydration": {
+      "daily_minimum_liters": 2.5,
+      "per_hour_workout_ml": 500,
+      "electrolytes_per_hour_workout": {
+        "sodium_mg": "500-700",
+        "potassium_mg": "200",
+        "magnesium_mg": "60"
+      },
+      "note": "2% dehidrasi = turun performa kognitif & fisik. Minum sebelum merasa haus."
+    },
+    "supplements_optional": {
+      "essential": [
+        {
+          "name": "Whey Protein",
+          "dose": "25-30g post-workout",
+          "purpose": "Memudahkan capai target protein harian",
+          "price_range_idr": "250.000-500.000/kg",
+          "necessary": false,
+          "note": "TIDAK WAJIB kalau protein dari makanan sudah cukup"
+        },
+        {
+          "name": "Creatine Monohydrate",
+          "dose": "3-5g/hari setiap hari",
+          "purpose": "Meningkatkan kekuatan & recovery. Suplemen paling banyak diteliti.",
+          "price_range_idr": "100.000-200.000/250g",
+          "necessary": false,
+          "note": "Evidence kuat (ISSN), aman untuk jangka panjang, tapi opsional"
+        }
+      ],
+      "situational": [
+        {
+          "name": "Vitamin D3",
+          "dose": "1000-2000 IU/hari",
+          "purpose": "Banyak orang Indonesia defisiensi walau negara tropis (kurang sinar matahari langsung)",
+          "necessary": false
+        },
+        {
+          "name": "Omega-3 (Minyak Ikan)",
+          "dose": "1-2g EPA+DHA/hari",
+          "purpose": "Anti-inflamasi untuk sendi",
+          "necessary": false
+        }
+      ],
+      "skip": [
+        {
+          "name": "BCAA",
+          "reason": "Tidak perlu kalau protein harian sudah cukup (ISSN)"
+        },
+        {
+          "name": "Fat burner",
+          "reason": "Tidak efektif, buang uang. Deficit kalori = satu-satunya cara turunkan lemak."
+        },
+        {
+          "name": "Testosterone booster",
+          "reason": "Tidak ada evidence. Buang uang."
+        }
+      ]
+    }
+  }
+}

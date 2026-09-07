@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calisthenics Tracker — Web Version</title>
+<style>
+:root {
+  --bg: #F7F8FA; --surface: #FFFFFF; --surface-2: #F0F2F5;
+  --ink: #1A1D21; --ink-muted: #6B7280; --border: #E5E7EB;
+  --accent: #E8542F; --accent-soft: #FDEDE8; --success: #16A34A; --success-soft: #E8F7EE;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #2A2D33; padding: 32px 24px; color: var(--ink);
+}
+h1.board-title { color:#fff; font-size:20px; font-weight:700; text-align:center; margin-bottom:6px; }
+p.board-sub { color:rgba(255,255,255,0.5); text-align:center; font-size:13px; margin-bottom:32px; }
+.browser {
+  width:1360px; margin:0 auto; border-radius:14px; overflow:hidden;
+  box-shadow:0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px #3A3D43; margin-bottom:40px;
+}
+.browser-bar {
+  background:#0B0C0E; padding:12px 16px; display:flex; gap:10px; align-items:center;
+}
+.browser-bar .dot { width:11px; height:11px; border-radius:50%; }
+.browser-bar .url {
+  flex:1; background:#1C1F23; border-radius:8px; padding:7px 14px; font-size:12px;
+  color:#9CA3AF; font-family:monospace;
+}
+.page { background:var(--bg); height:840px; display:flex; overflow:hidden; }
+
+/* sidebar */
+.sidebar {
+  width:230px; background:var(--surface); border-right:1px solid var(--border);
+  padding:24px 14px; display:flex; flex-direction:column; flex-shrink:0;
+}
+.logo { display:flex; align-items:center; gap:10px; padding:0 10px 22px; }
+.logo .mark { width:36px; height:36px; border-radius:11px; background:linear-gradient(135deg,#E8542F,#C93D1D); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px; }
+.logo b { font-size:15px; letter-spacing:-0.2px; }
+.nav { display:flex; flex-direction:column; gap:4px; }
+.nav a {
+  display:flex; align-items:center; gap:11px; padding:11px 12px; border-radius:11px;
+  font-size:13.5px; font-weight:600; color:var(--ink-muted); text-decoration:none;
+}
+.nav a.on { background:var(--accent-soft); color:var(--accent); }
+.nav a span.ic { font-size:16px; width:20px; text-align:center; filter:grayscale(1); opacity:0.7; }
+.nav a.on span.ic { filter:none; opacity:1; }
+.side-foot { margin-top:auto; padding:12px; background:var(--surface-2); border-radius:12px; }
+.side-foot b { font-size:12.5px; display:block; }
+.side-foot small { font-size:11px; color:var(--ink-muted); }
+.side-foot .bar { height:5px; background:#E0E3E8; border-radius:3px; margin:8px 0 5px; overflow:hidden; }
+.side-foot .bar i { display:block; height:100%; width:64%; background:var(--accent); }
+
+/* theme toggle */
+.theme-row { display:flex; justify-content:flex-end; gap:8px; align-items:center; padding:16px 28px 0; }
+.toggle-pill { display:flex; background:var(--surface-2); border-radius:20px; padding:3px; gap:2px; width:76px; }
+.toggle-pill span { flex:1; text-align:center; padding:5px 0; border-radius:16px; font-size:13px; opacity:0.45; }
+.toggle-pill span.active { background:var(--surface); box-shadow:var(--shadow); opacity:1; }
+
+/* main */
+.main { flex:1; padding:6px 28px 24px; overflow:hidden; }
+.main-head { display:flex; justify-content:space-between; align-items:flex-end; padding:8px 0 16px; }
+.main-head h2 { font-size:24px; font-weight:800; letter-spacing:-0.4px; }
+.main-head small { color:var(--ink-muted); font-size:13px; font-weight:600; }
+
+.grid { display:grid; grid-template-columns: 1.6fr 1fr; gap:16px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:var(--shadow); margin-bottom:16px; }
+.card h3 { font-size:15px; font-weight:800; margin-bottom:4px; }
+.card .sub { font-size:12px; color:var(--ink-muted); }
+
+.today-hero {
+  border-radius:16px; padding:20px; color:#fff; margin-bottom:16px;
+  background:linear-gradient(135deg,#E8542F,#C93D1D);
+  box-shadow:0 8px 20px rgba(232,84,47,0.3);
+}
+.today-hero .lbl { font-size:11px; font-weight:700; opacity:0.85; text-transform:uppercase; letter-spacing:0.8px; }
+.today-hero h3 { font-size:20px; font-weight:800; margin:4px 0 2px; }
+.today-hero .meta { font-size:12.5px; opacity:0.85; margin-bottom:14px; }
+.btn-go { padding:11px 22px; border-radius:11px; border:none; background:#fff; color:#C93D1D; font-weight:800; font-size:13.5px; cursor:pointer; }
+
+.ex-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.ex-row { display:flex; align-items:center; gap:11px; padding:11px 13px; background:var(--surface-2); border-radius:12px; }
+.ex-num { width:30px; height:30px; border-radius:9px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; flex-shrink:0; }
+.ex-info { flex:1; min-width:0; }
+.ex-info b { font-size:13px; display:block; }
+.ex-info small { font-size:11px; color:var(--ink-muted); }
+.ex-rep { font-size:11.5px; font-weight:700; color:var(--ink); background:var(--surface); padding:4px 8px; border-radius:7px; white-space:nowrap; }
+
+.stats-inline { display:flex; gap:12px; margin-bottom:16px; }
+.stat { flex:1; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px 16px; box-shadow:var(--shadow); }
+.stat b { font-size:20px; display:block; letter-spacing:-0.4px; }
+.stat small { font-size:11px; color:var(--ink-muted); font-weight:600; }
+.stat .chip { display:inline-flex; font-size:10px; font-weight:700; padding:2px 7px; border-radius:6px; margin-left:6px; vertical-align:middle; }
+.chip.up { background:var(--success-soft); color:var(--success); }
+
+.bars { display:flex; align-items:flex-end; gap:10px; height:120px; padding:0 4px; }
+.bars i { flex:1; border-radius:6px 6px 3px 3px; background:var(--accent-soft); position:relative; }
+.bars i.hot { background:var(--accent); }
+.bars i b { position:absolute; top:-17px; left:0; right:0; text-align:center; font-size:10px; color:var(--ink-muted); font-weight:700; }
+.days { display:flex; gap:10px; padding:6px 4px 0; }
+.days span { flex:1; text-align:center; font-size:10.5px; color:var(--ink-muted); font-weight:600; }
+
+.ring-wrap { display:flex; gap:20px; align-items:center; }
+.ring { width:74px; height:74px; border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; flex-shrink:0; }
+.ring::before { content:''; position:absolute; inset:8px; border-radius:50%; background:var(--surface); }
+.ring b { position:relative; font-size:15px; }
+.ring.c1 { background:conic-gradient(var(--accent) 0 68%, var(--surface-2) 68% 100%); }
+.ring.c2 { background:conic-gradient(#F59E0B 0 45%, var(--surface-2) 45% 100%); }
+.ring-info b { font-size:14px; display:block; }
+.ring-info small { font-size:11.5px; color:var(--ink-muted); line-height:1.5; display:block; }
+
+.streak { display:flex; align-items:center; gap:13px; }
+.streak .ic { font-size:26px; }
+.streak b { font-size:14px; display:block; }
+.streak small { font-size:11.5px; color:var(--ink-muted); }
+.dots { display:flex; gap:5px; margin-left:auto; }
+.dots i { width:10px; height:10px; border-radius:50%; background:var(--surface-2); }
+.dots i.on { background:var(--accent); }
+
+.table { width:100%; border-collapse:collapse; font-size:12.5px; }
+.table th { text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.6px; color:var(--ink-muted); padding:8px 6px; border-bottom:1px solid var(--border); }
+.table td { padding:10px 6px; border-bottom:1px solid var(--border); font-weight:500; }
+.table tr:last-child td { border-bottom:none; }
+.pill { font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:7px; }
+.pill.done { background:var(--success-soft); color:var(--success); }
+.pill.next { background:var(--accent-soft); color:var(--accent); }
+.pill.rest { background:var(--surface-2); color:var(--ink-muted); }
+.label2 { font-size:11px; font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:10px; }
+</style>
+</head>
+<body>
+
+<h1 class="board-title">Web Version — Desktop Layout</h1>
+<p class="board-sub">Responsive web (Flutter Web) — sama design system, layout melebar + sidebar</p>
+
+<!-- ══════════ WEB 1: DASHBOARD ══════════ -->
+<div class="browser">
+  <div class="browser-bar">
+    <span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span>
+    <span class="url">calitracker.app/dashboard</span>
+  </div>
+  <div class="page">
+    <div class="sidebar">
+      <div class="logo"><div class="mark">C</div><b>Calisthenics<br>Tracker</b></div>
+      <div class="nav">
+        <a class="on"><span class="ic">🏠</span> Beranda</a>
+        <a><span class="ic">📅</span> Plan Mingguan</a>
+        <a><span class="ic">📚</span> Library Gerakan</a>
+        <a><span class="ic">📈</span> Progres</a>
+        <a><span class="ic">🍎</span> Nutrisi</a>
+        <a><span class="ic">⚙️</span> Setelan</a>
+      </div>
+      <div class="side-foot">
+        <b>Level 2 · Novice</b>
+        <div class="bar"><i></i></div>
+        <small>340 / 500 XP</small>
+      </div>
+    </div>
+    <div class="main">
+      <div class="theme-row"><div class="toggle-pill"><span>☀️</span><span class="active">🌙</span></div></div>
+      <div class="main-head">
+        <div><small>Rabu, 4 September 2026</small><h2>Halo, Andi 👋</h2></div>
+        <button class="btn-go">🔥 Streak 5 hari</button>
+      </div>
+      <div class="stats-inline">
+        <div class="stat"><b>68%</b><small>Progress minggu</small></div>
+        <div class="stat"><b>7</b><small>Workout bulan ini <span class="chip up">+2</span></small></div>
+        <div class="stat"><b>86.0 kg</b><small>Berat badan <span class="chip up">−1,5 kg</span></small></div>
+        <div class="stat"><b>BMI 29.9</b><small>Overweight → target 24.9</small></div>
+      </div>
+      <div class="grid">
+        <div>
+          <div class="today-hero">
+            <div class="lbl">Workout Hari Ini</div>
+            <h3>Full Body B — 5 gerakan</h3>
+            <div class="meta">±25 menit · Warmup + Cooldown termasuk · Tanpa alat</div>
+            <button class="btn-go">▶ Mulai Sekarang</button>
+          </div>
+          <div class="card">
+            <h3>Volume Latihan — Minggu Ini</h3>
+            <div style="height:8px"></div>
+            <div class="bars">
+              <i style="height:42%"><b>320</b></i><i style="height:58%"><b>450</b></i><i style="height:36%"></i><i class="hot" style="height:78%"><b>610</b></i><i style="height:24%"></i><i style="height:12%"></i><i style="height:0%"></i>
+            </div>
+            <div class="days"><span>SEN</span><span>SEL</span><span>RAB</span><span>KAM</span><span>JUM</span><span>SAB</span><span>MIN</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="ring-wrap">
+              <div class="ring c1"><b>2/3</b></div>
+              <div class="ring-info"><b>Sesi minggu ini</b><small>Satu lagi! Jumat: Full Body C</small></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ring-wrap">
+              <div class="ring c2"><b>45%</b></div>
+              <div class="ring-info"><b>Kalori hari ini</b><small>920 / 2.047 kcal · sisa 1.127</small></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="streak">
+              <div class="ic">🏅</div>
+              <div><b>Personal Record</b><small>Squat 3×15 — 2 September</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ WEB 2: PLAN MINGGUAN ══════════ -->
+<div class="browser">
+  <div class="browser-bar">
+    <span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span>
+    <span class="url">calitracker.app/plan</span>
+  </div>
+  <div class="page">
+    <div class="sidebar">
+      <div class="logo"><div class="mark">C</div><b>Calisthenics<br>Tracker</b></div>
+      <div class="nav">
+        <a><span class="ic">🏠</span> Beranda</a>
+        <a class="on"><span class="ic">📅</span> Plan Mingguan</a>
+        <a><span class="ic">📚</span> Library Gerakan</a>
+        <a><span class="ic">📈</span> Progres</a>
+        <a><span class="ic">🍎</span> Nutrisi</a>
+        <a><span class="ic">⚙️</span> Setelan</a>
+      </div>
+      <div class="side-foot">
+        <b>Plan Aktif</b>
+        <div class="bar"><i></i></div>
+        <small>Minggu 3 dari 8 · Beginner</small>
+      </div>
+    </div>
+    <div class="main">
+      <div class="theme-row"><div class="toggle-pill"><span class="active">☀️</span><span>🌙</span></div></div>
+      <div class="main-head">
+        <div><small>Beginner · Full Body · Tanpa alat</small><h2>Plan Mingguan</h2></div>
+        <button class="btn-go">🤖 Regenerate dengan AI</button>
+      </div>
+      <div class="stats-inline">
+        <div class="stat"><b>3×</b><small>per minggu</small></div>
+        <div class="stat"><b>±25</b><small>menit / sesi</small></div>
+        <div class="stat"><b>5</b><small>gerakan / sesi</small></div>
+        <div class="stat"><b>8</b><small>minggu total</small></div>
+      </div>
+      <div class="card">
+        <div class="label2">Jadwal Minggu Ini</div>
+        <table class="table">
+          <tr><th>Hari</th><th>Fokus</th><th>Gerakan</th><th>Durasi</th><th>Status</th></tr>
+          <tr><td><b>Senin</b></td><td>Full Body A</td><td>5 gerakan · Push Legs Core</td><td>25 mnt</td><td><span class="pill done">✓ Selesai</span></td></tr>
+          <tr><td><b>Selasa</b></td><td>Rest / Jalan 20-30 mnt</td><td>—</td><td>—</td><td><span class="pill rest">Rest</span></td></tr>
+          <tr><td><b>Rabu</b></td><td>Full Body B</td><td>5 gerakan · Push Legs Core</td><td>25 mnt</td><td><span class="pill next">Hari ini</span></td></tr>
+          <tr><td><b>Kamis</b></td><td>Rest / Cardio ringan</td><td>—</td><td>—</td><td><span class="pill rest">Rest</span></td></tr>
+          <tr><td><b>Jumat</b></td><td>Full Body C</td><td>5 gerakan · Push Legs Core</td><td>25 mnt</td><td><span class="pill rest">Akan datang</span></td></tr>
+          <tr><td><b>Sabtu</b></td><td>Rest / Jalan 20-30 mnt</td><td>—</td><td>—</td><td><span class="pill rest">Rest</span></td></tr>
+          <tr><td><b>Minggu</b></td><td>Rest total</td><td>—</td><td>—</td><td><span class="pill rest">Rest</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
