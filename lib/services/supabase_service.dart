@@ -109,6 +109,12 @@ class SupabaseService {
           );
         }
 
+        final sp = await SharedPreferences.getInstance();
+        await sp.setString('auth_session', json.encode({
+          'id': res.user!.id,
+          'email': email,
+          'name': name,
+        }));
         return const RegisterOutcome(RegisterStatus.success);
       } on AuthException catch (ae) {
         debugPrint('Supabase AuthException: ${ae.message}');
@@ -153,7 +159,17 @@ class SupabaseService {
           email: email,
           password: password,
         );
-        return res.user != null;
+        if (res.user != null) {
+          final sp = await SharedPreferences.getInstance();
+          final metaName = res.user!.userMetadata?['name']?.toString() ?? email.split('@').first;
+          await sp.setString('auth_session', json.encode({
+            'id': res.user!.id,
+            'email': email,
+            'name': metaName,
+          }));
+          return true;
+        }
+        return false;
       } catch (e) {
         debugPrint('Supabase signIn error: $e');
         return false;
@@ -246,6 +262,7 @@ class SupabaseService {
   Future<void> saveWorkoutPlan(String email, Map<String, dynamic> plan) async {
     final sp = await SharedPreferences.getInstance();
     await sp.setString('active_workout_plan_$email', json.encode(plan));
+    await sp.setString('plan_$email', json.encode(plan));
 
     if (_isLive && _client != null) {
       final user = _client!.auth.currentUser;
