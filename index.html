@@ -31,6 +31,64 @@
 
   <title>calisthenics_tracker</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    // Web Audio Synthesizer for workout beeps & whistles (zero dependencies)
+    (function() {
+      let audioCtx = null;
+      function getAudioContext() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      window.playWorkoutBeep = function(freq, duration) {
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq || 880, ctx.currentTime);
+          gain.gain.setValueAtTime(0.2, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (duration || 0.12));
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + (duration || 0.12));
+        } catch (e) {
+          console.warn('Audio play failed:', e);
+        }
+      };
+
+      window.playWorkoutWhistle = function() {
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const notes = [1046.5, 1318.5, 1567.98]; // C6 -> E6 -> G6
+          notes.forEach((f, idx) => {
+            const start = ctx.currentTime + (idx * 0.1);
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(f, start);
+            gain.gain.setValueAtTime(0.25, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.15);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.15);
+          });
+        } catch (e) {
+          console.warn('Whistle play failed:', e);
+        }
+      };
+    })();
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
