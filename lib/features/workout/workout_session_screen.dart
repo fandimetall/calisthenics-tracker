@@ -380,6 +380,37 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          tooltip: 'Kembali ke Beranda',
+          onPressed: () async {
+            if (_completedSetsCount > 0 && _completedSetsCount < _totalSets) {
+              final leave = await showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Keluar dari Sesi?'),
+                  content: Text(
+                    'Kamu sudah menyelesaikan $_completedSetsCount dari $_totalSets set. '
+                    'Progres yang sudah dicentang akan hilang jika keluar sekarang.',
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(ctx).pop(false),
+                      child: const Text('Lanjut Latihan'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(ctx).pop(true),
+                      child: const Text('Keluar', style: TextStyle(color: Colors.redAccent)),
+                    ),
+                  ],
+                ),
+              );
+              if (leave == true && context.mounted) Navigator.of(context).pop();
+            } else {
+              Navigator.of(context).pop();
+            }
+          },
+        ),
         title: Text(
           widget.workoutDay?['focus'] ?? 'Sesi Latihan',
           style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w800),
