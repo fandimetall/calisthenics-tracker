@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:calisthenics_tracker/features/workout/workout_session_screen.dart';
 import 'package:calisthenics_tracker/features/library/exercise_library_screen.dart';
+import 'package:calisthenics_tracker/features/history/history_screen.dart';
 
 void main() {
   testWidgets('WorkoutSessionScreen renders timer and controls cleanly', (WidgetTester tester) async {
@@ -41,5 +42,16 @@ void main() {
 
     expect(find.byType(TextField), findsOneWidget);
     expect(find.text('Semua'), findsOneWidget);
+  });
+
+  testWidgets('HistoryScreen renders title and overview cards cleanly', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: HistoryScreen(),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(find.text('Riwayat & Progres'), findsOneWidget);
   });
 }

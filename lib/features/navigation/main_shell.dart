@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../dashboard/dashboard_screen.dart';
+import '../history/history_screen.dart';
 import '../library/exercise_library_screen.dart';
 import '../workout/workout_session_screen.dart';
 
@@ -23,6 +24,7 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
   final GlobalKey<DashboardScreenState> _dashboardKey = GlobalKey<DashboardScreenState>();
+  final GlobalKey<HistoryScreenState> _historyKey = GlobalKey<HistoryScreenState>();
 
   Future<void> _openWorkoutSession({Map<String, dynamic>? workoutDay}) async {
     await Navigator.of(context).push(
@@ -35,10 +37,11 @@ class _MainShellState extends State<MainShell> {
         ),
       ),
     );
-    // Force reload dashboard after session ends
+    // Force reload dashboard and history after session ends
     if (mounted) {
       setState(() => _currentIndex = 0);
       _dashboardKey.currentState?.reload();
+      _historyKey.currentState?.reload();
     }
   }
 
@@ -57,6 +60,10 @@ class _MainShellState extends State<MainShell> {
             onLogout: widget.onLogout,
             onStartWorkout: (workoutDay) => _openWorkoutSession(workoutDay: workoutDay),
           ),
+          HistoryScreen(
+            key: _historyKey,
+            onStartWorkout: () => _openWorkoutSession(),
+          ),
           const ExerciseLibraryScreen(),
         ],
       ),
@@ -66,6 +73,8 @@ class _MainShellState extends State<MainShell> {
           setState(() => _currentIndex = i);
           if (i == 0) {
             _dashboardKey.currentState?.reload();
+          } else if (i == 1) {
+            _historyKey.currentState?.reload();
           }
         },
         backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
@@ -77,6 +86,11 @@ class _MainShellState extends State<MainShell> {
             icon: const Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home_rounded, color: isDark ? AppColors.accentDark : AppColors.accent),
             label: 'Beranda',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.history_rounded),
+            selectedIcon: Icon(Icons.history_rounded, color: isDark ? AppColors.accentDark : AppColors.accent),
+            label: 'Riwayat',
           ),
           NavigationDestination(
             icon: const Icon(Icons.fitness_center_outlined),
