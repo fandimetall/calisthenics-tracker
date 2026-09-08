@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/responsive_layout.dart';
+import '../../services/supabase_service.dart';
 
 /// Dashboard utama — streak, level/XP, today workout, weekly chart.
 class DashboardScreen extends StatefulWidget {
@@ -18,18 +20,20 @@ class DashboardScreen extends StatefulWidget {
     this.onLogout,
     this.onStartWorkout,
   });
-  @override State<DashboardScreen> createState() => _DashboardScreenState();
+  @override
+  State<DashboardScreen> createState() => DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
-  // Mock data — nanti diganti data dari SharedPreferences / SQLite
+class DashboardScreenState extends State<DashboardScreen> {
   int _streak = 0;
   int _level = 1;
   int _xp = 0;
-  final int _xpToNext = 100; // ponytail: hardcoded, derive from level formula when leveling logic lands
+  final int _xpToNext = 100;
   String _tierName = 'Beginner';
   String _todayFocus = 'Full Body';
+  String _todayDayName = 'Hari Ini';
   int _todayExerciseCount = 0;
+  bool _completedToday = false;
   Map<String, dynamic>? _todayWorkoutDay;
   List<double> _weeklyMinutes = [0, 0, 0, 0, 0, 0, 0]; // Sen-Min
   String _userName = '';
@@ -41,41 +45,86 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _loadData();
   }
 
+  void reload() {
+    _loadData();
+  }
+
   Future<void> _loadData() async {
     final prefs = await SharedPreferences.getInstance();
-    // Auth service stores session as JSON in 'auth_session'
     final sessionRaw = prefs.getString('auth_session');
     String email = '';
     String name = '';
     if (sessionRaw != null) {
-      final session = jsonDecode(sessionRaw) as Map<String, dynamic>;
-      email = session['email'] as String? ?? '';
-      name = session['name'] as String? ?? email.split('@').first;
+      try {
+        final session = jsonDecode(sessionRaw) as Map<String, dynamic>;
+        email = session['email'] as String? ?? '';
+        name = session['name'] as String? ?? email.split('@').first;
+      } catch (_) {}
     }
-    final streak = prefs.getInt('streak_$email') ?? 0;
-    final level = prefs.getInt('level_$email') ?? 1;
-    final xp = prefs.getInt('xp_$email') ?? 0;
+    if (email.isEmpty) {
+      final cur = await SupabaseService.instance.currentUser();
+      if (cur != null && cur['email'] != null) {
+        email = cur['email']!;
+        name = cur['name'] ?? email.split('@').first;
+      }
+    }
+
+    int totalXp = prefs.getInt('xp_$email') ?? 0;
+    int streak = prefs.getInt('streak_$email') ?? 0;
+    int currentDayIdx = prefs.getInt('current_day_index_$email') ?? 0;
+
+    // Self-healing: restore XP & progress from Supabase logs if local state is uninitialized
+    if (totalXp == 0 && email.isNotEmpty) {
+      try {
+        final logs = await SupabaseService.instance.getWorkoutLogs(email);
+        if (logs.isNotEmpty) {
+          totalXp = logs.length * 50;
+          streak = math.max(1, logs.length);
+          currentDayIdx = logs.length;
+          await prefs.setInt('xp_$email', totalXp);
+          await prefs.setInt('streak_$email', streak);
+          await prefs.setInt('level_$email', 1 + (totalXp ~/ 100));
+          await prefs.setInt('current_day_index_$email', currentDayIdx);
+        }
+      } catch (_) {}
+    }
+
+    final level = 1 + (totalXp ~/ 100);
+    final xpInLevel = totalXp % 100;
     final tier = prefs.getString('tier_$email') ?? 'Beginner';
 
-    // Mock weekly data (nanti diganti log real)
+    // Weekly minutes
     final weeklyRaw = prefs.getStringList('weekly_minutes_$email');
-    List<double> weekly = [0, 25, 30, 0, 40, 20, 0]; // demo data
+    List<double> weekly = [0, 0, 0, 0, 0, 0, 0];
     if (weeklyRaw != null && weeklyRaw.length == 7) {
-      weekly = weeklyRaw.map((e) => double.tryParse(e) ?? 0).toList();
+      weekly = weeklyRaw.map((e) => double.tryParse(e) ?? 0.0).toList();
+    } else {
+      if (totalXp > 0) {
+        final dayIdx = DateTime.now().weekday - 1;
+        weekly[dayIdx] = 15.0; // recorded session
+      } else {
+        weekly = [0, 25, 30, 0, 40, 20, 0]; // demo data
+      }
     }
 
-    // Count today's exercises from plan
-    int todayCount = 5; // default demo
+    final todayStr = DateTime.now().toIso8601String().split('T').first;
+    final lastCompletedDate = prefs.getString('last_completed_date_$email');
+    final completedToday = lastCompletedDate == todayStr;
+
+    // Count today's exercises from plan according to active day index
+    int todayCount = 5;
     String focus = 'Full Body';
+    String dayName = 'Hari Ini';
     try {
-      final planJson = prefs.getString('plan_$email');
+      final planJson = prefs.getString('plan_$email') ?? prefs.getString('active_workout_plan_$email');
       if (planJson != null) {
         final plan = jsonDecode(planJson) as Map<String, dynamic>;
         final days = plan['days'] as List? ?? [];
         if (days.isNotEmpty) {
-          // Pick first day as "today" for demo
-          final day = days[0] as Map<String, dynamic>;
+          final targetIdx = currentDayIdx % days.length;
+          final day = days[targetIdx] as Map<String, dynamic>;
           focus = day['focus'] as String? ?? 'Full Body';
+          dayName = day['dayName'] as String? ?? 'Hari Ini';
           todayCount = (day['exercises'] as List?)?.length ?? 5;
           _todayWorkoutDay = day;
         }
@@ -87,10 +136,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       _userName = name;
       _streak = streak;
       _level = level;
-      _xp = xp;
+      _xp = xpInLevel;
       _tierName = tier;
       _todayFocus = focus;
+      _todayDayName = dayName;
       _todayExerciseCount = todayCount;
+      _completedToday = completedToday;
       _weeklyMinutes = weekly;
       _loading = false;
     });
@@ -328,14 +379,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const Icon(Icons.fitness_center_rounded, size: 20),
               const SizedBox(width: 8),
               Text(
-                'Latihan Hari Ini',
+                _completedToday ? 'Target Hari Ini Selesai! 🎉' : 'Latihan Hari Ini',
                 style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w700, color: isDark ? AppColors.inkDark : AppColors.inkLight),
               ),
+              const Spacer(),
+              if (_completedToday)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.check_circle_rounded, size: 13, color: Colors.green),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Selesai',
+                        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.green),
+                      ),
+                    ],
+                  ),
+                ),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             children: [
+              _infoChip(isDark, Icons.calendar_today_rounded, _todayDayName),
+              const SizedBox(width: 8),
               _infoChip(isDark, Icons.track_changes, _todayFocus),
               const SizedBox(width: 8),
               _infoChip(isDark, Icons.format_list_numbered, '$_todayExerciseCount gerakan'),
@@ -346,8 +419,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             width: double.infinity,
             child: FilledButton.icon(
               onPressed: () => widget.onStartWorkout?.call(_todayWorkoutDay),
-              icon: const Icon(Icons.play_arrow_rounded),
-              label: const Text('Mulai Latihan'),
+              icon: Icon(_completedToday ? Icons.arrow_forward_rounded : Icons.play_arrow_rounded),
+              label: Text(_completedToday
+                  ? 'Lanjut Latihan Berikutnya ($_todayDayName)'
+                  : 'Mulai Latihan ($_todayDayName)'),
             ),
           ),
         ],

@@ -22,20 +22,24 @@ class MainShell extends StatefulWidget {
 
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
+  final GlobalKey<DashboardScreenState> _dashboardKey = GlobalKey<DashboardScreenState>();
 
-  void _openWorkoutSession({Map<String, dynamic>? workoutDay}) {
-    Navigator.of(context).push(
+  Future<void> _openWorkoutSession({Map<String, dynamic>? workoutDay}) async {
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => WorkoutSessionScreen(
           workoutDay: workoutDay,
           onFinished: () {
             Navigator.of(context).pop();
-            // Force refresh dashboard
-            setState(() => _currentIndex = 0);
           },
         ),
       ),
     );
+    // Force reload dashboard after session ends
+    if (mounted) {
+      setState(() => _currentIndex = 0);
+      _dashboardKey.currentState?.reload();
+    }
   }
 
   @override
@@ -47,6 +51,7 @@ class _MainShellState extends State<MainShell> {
         index: _currentIndex,
         children: [
           DashboardScreen(
+            key: _dashboardKey,
             toggleTheme: widget.toggleTheme,
             mode: widget.themeMode,
             onLogout: widget.onLogout,
@@ -57,7 +62,12 @@ class _MainShellState extends State<MainShell> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
-        onDestinationSelected: (i) => setState(() => _currentIndex = i),
+        onDestinationSelected: (i) {
+          setState(() => _currentIndex = i);
+          if (i == 0) {
+            _dashboardKey.currentState?.reload();
+          }
+        },
         backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
         indicatorColor: isDark ? AppColors.accentSoftDark : AppColors.accentSoftLight,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -164,17 +165,47 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
         email = d['email']?.toString() ?? 'local';
       } catch (_) {}
     }
+    if (email == 'local') {
+      final cur = await SupabaseService.instance.currentUser();
+      if (cur != null && cur['email'] != null && cur['email']!.isNotEmpty) {
+        email = cur['email']!;
+      }
+    }
 
-    // Award +50 XP and increment streak if today is fresh
+    // 1. Award +50 XP and update level
     final currentXp = prefs.getInt('xp_$email') ?? 0;
     final newXp = currentXp + 50;
     await prefs.setInt('xp_$email', newXp);
+    final newLevel = 1 + (newXp ~/ 100);
+    await prefs.setInt('level_$email', newLevel);
 
-    final currentStreak = prefs.getInt('streak_$email') ?? 0;
-    final newStreak = currentStreak + 1;
-    await prefs.setInt('streak_$email', newStreak);
+    // 2. Increment streak if first workout today
+    final todayStr = DateTime.now().toIso8601String().split('T').first;
+    final lastDate = prefs.getString('last_completed_date_$email');
+    if (lastDate != todayStr) {
+      final currentStreak = prefs.getInt('streak_$email') ?? 0;
+      await prefs.setInt('streak_$email', currentStreak + 1);
+      await prefs.setString('last_completed_date_$email', todayStr);
+    }
 
-    // Save session to history
+    // 3. Advance to next workout day in plan
+    final currentDayIdx = prefs.getInt('current_day_index_$email') ?? 0;
+    await prefs.setInt('current_day_index_$email', currentDayIdx + 1);
+
+    // 4. Update weekly minutes
+    final durationMins = math.max(1, (_elapsedSeconds / 60).round());
+    final weeklyRaw = prefs.getStringList('weekly_minutes_$email');
+    List<double> weekly = [0, 0, 0, 0, 0, 0, 0];
+    if (weeklyRaw != null && weeklyRaw.length == 7) {
+      weekly = weeklyRaw.map((e) => double.tryParse(e) ?? 0.0).toList();
+    }
+    final dayOfWeekIdx = DateTime.now().weekday - 1; // 0=Senin, 6=Minggu
+    if (dayOfWeekIdx >= 0 && dayOfWeekIdx < 7) {
+      weekly[dayOfWeekIdx] += durationMins;
+    }
+    await prefs.setStringList('weekly_minutes_$email', weekly.map((e) => e.toString()).toList());
+
+    // 5. Save session to history
     final historyList = prefs.getStringList('history_$email') ?? [];
     historyList.add(json.encode({
       'date': DateTime.now().toIso8601String(),
@@ -182,13 +213,17 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
       'completedSets': _completedSetsCount,
       'totalSets': _totalSets,
       'xpGained': 50,
+      'sessionName': widget.workoutDay?['focus'] ?? widget.workoutDay?['dayName'] ?? 'Quick Workout',
     }));
     await prefs.setStringList('history_$email', historyList);
 
-    // Sync session to Supabase in background
+    // 6. Sync session to Supabase in background
+    final sessionDisplayName = widget.workoutDay?['focus']?.toString() ??
+        widget.workoutDay?['dayName']?.toString() ??
+        'Quick Workout';
     SupabaseService.instance.logWorkoutSession(
       email: email,
-      sessionName: widget.workoutDay?['dayName']?.toString() ?? 'Quick Workout',
+      sessionName: sessionDisplayName,
       durationSeconds: _elapsedSeconds,
       details: {
         'completedSets': _completedSetsCount,
