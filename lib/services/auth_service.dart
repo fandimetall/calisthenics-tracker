@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'supabase_service.dart';
@@ -24,10 +25,28 @@ class AuthService {
 
   Future<Map<String, String>?> currentUser() => _supa.currentUser();
 
-  /// Onboarding status flag per user
+  /// Onboarding status flag per user (checks local storage and Supabase Cloud fallback)
   Future<bool> isOnboarded(String email) async {
     final sp = await SharedPreferences.getInstance();
-    return sp.getBool('onboarded_$email') ?? false;
+    final local = sp.getBool('onboarded_$email') ?? false;
+    if (local) return true;
+
+    // Check if user already completed onboarding on Supabase Cloud
+    final metrics = await _supa.getUserMetrics(email);
+    if (metrics != null && metrics.isNotEmpty) {
+      await sp.setBool('onboarded_$email', true);
+      // Restore plan if missing locally
+      final plan = await _supa.getActiveWorkoutPlan(email);
+      if (plan != null) {
+        await sp.setString('plan_$email', json.encode(plan));
+        await sp.setString('active_workout_plan_$email', json.encode(plan));
+        if (plan['tier'] != null) {
+          await sp.setString('tier_$email', plan['tier'].toString());
+        }
+      }
+      return true;
+    }
+    return false;
   }
 
   Future<void> setOnboarded(String email) async {

@@ -280,6 +280,53 @@ class SupabaseService {
     }
   }
 
+  Future<Map<String, dynamic>?> getUserMetrics(String email) async {
+    if (_isLive && _client != null) {
+      final user = _client!.auth.currentUser;
+      if (user != null) {
+        try {
+          final res = await _client!
+              .from('user_metrics')
+              .select()
+              .eq('user_id', user.id)
+              .order('created_at', ascending: false)
+              .limit(1)
+              .maybeSingle();
+          if (res != null) return Map<String, dynamic>.from(res);
+        } catch (_) {}
+      }
+    }
+    final sp = await SharedPreferences.getInstance();
+    final raw = sp.getString('user_metrics_$email');
+    if (raw == null) return null;
+    return json.decode(raw) as Map<String, dynamic>;
+  }
+
+  Future<Map<String, dynamic>?> getActiveWorkoutPlan(String email) async {
+    if (_isLive && _client != null) {
+      final user = _client!.auth.currentUser;
+      if (user != null) {
+        try {
+          final res = await _client!
+              .from('workout_plans')
+              .select()
+              .eq('user_id', user.id)
+              .eq('is_active', true)
+              .order('created_at', ascending: false)
+              .limit(1)
+              .maybeSingle();
+          if (res != null && res['plan_data'] != null) {
+            return Map<String, dynamic>.from(res['plan_data']);
+          }
+        } catch (_) {}
+      }
+    }
+    final sp = await SharedPreferences.getInstance();
+    final raw = sp.getString('plan_$email') ?? sp.getString('active_workout_plan_$email');
+    if (raw == null) return null;
+    return json.decode(raw) as Map<String, dynamic>;
+  }
+
   Future<void> logWorkoutSession({
     required String email,
     required String sessionName,
