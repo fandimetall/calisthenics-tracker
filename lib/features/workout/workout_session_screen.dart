@@ -149,10 +149,32 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
     return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
   }
 
+  int _parseSets(dynamic val) {
+    if (val is num) return val.toInt();
+    if (val is String) {
+      final digits = val.replaceAll(RegExp(r'[^0-9]'), '');
+      return int.tryParse(digits) ?? 3;
+    }
+    return 3;
+  }
+
+  int _parseRest(dynamic val) {
+    if (val is num) return val.toInt();
+    if (val is String) {
+      final digits = val.replaceAll(RegExp(r'[^0-9]'), '');
+      return int.tryParse(digits) ?? 60;
+    }
+    return 60;
+  }
+
   int get _totalSets {
     int count = 0;
     for (final ex in _exercises) {
-      count += (ex['sets'] as num? ?? 3).toInt();
+      if (ex is Map) {
+        count += _parseSets(ex['sets']);
+      } else {
+        count += 3;
+      }
     }
     return count;
   }
@@ -520,7 +542,10 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 8, 20, 80),
                   itemCount: _exercises.length,
                   itemBuilder: (ctx, i) {
-                    final ex = _exercises[i] as Map<String, dynamic>;
+                    final exRaw = _exercises[i];
+                    final Map<String, dynamic> ex = exRaw is Map
+                        ? Map<String, dynamic>.from(exRaw)
+                        : <String, dynamic>{};
                     return _buildExerciseCard(ex, i, isDark);
                   },
                 ),
@@ -558,11 +583,11 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
   }
 
   Widget _buildExerciseCard(Map<String, dynamic> ex, int exIdx, bool isDark) {
-    final name = ex['name'] as String? ?? 'Exercise';
-    final sets = (ex['sets'] as num? ?? 3).toInt();
+    final name = ex['name']?.toString() ?? 'Exercise';
+    final sets = _parseSets(ex['sets']);
     final reps = ex['reps']?.toString() ?? '10';
-    final rest = (ex['rest'] as num? ?? 60).toInt();
-    final instructions = ex['instructions'] as String? ?? '';
+    final rest = _parseRest(ex['rest']);
+    final instructions = ex['instructions']?.toString() ?? '';
     final completedSetIndices = _completedSets[exIdx] ?? <int>{};
 
     final id = ex['id']?.toString() ?? '';
