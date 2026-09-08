@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/responsive_layout.dart';
 import '../../core/widgets/exercise_video_launcher.dart';
+import '../../core/audio/audio_beeper.dart';
 import '../../services/supabase_service.dart';
 
 class WorkoutSessionScreen extends StatefulWidget {
@@ -33,6 +34,7 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
   int _restSecondsRemaining = 0;
   Timer? _restTimer;
   bool _isResting = false;
+  bool _soundEnabled = true;
 
   // Exercise tracking state: Map<exerciseIndex, Set<setIndex>>
   final Map<int, Set<int>> _completedSets = {};
@@ -109,9 +111,17 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
         return;
       }
       if (_restSecondsRemaining > 1) {
-        setState(() => _restSecondsRemaining--);
+        final nextVal = _restSecondsRemaining - 1;
+        // Beeper sound at 3, 2, 1
+        if (_soundEnabled && nextVal <= 3 && nextVal >= 1) {
+          AudioBeeper.countdown();
+        }
+        setState(() => _restSecondsRemaining = nextVal);
       } else {
         timer.cancel();
+        if (_soundEnabled) {
+          AudioBeeper.finished();
+        }
         setState(() {
           _isResting = false;
           _restSecondsRemaining = 0;
@@ -353,6 +363,16 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
           style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w800),
         ),
         actions: [
+          IconButton(
+            icon: Icon(
+              _soundEnabled ? Icons.volume_up_rounded : Icons.volume_off_rounded,
+              color: _soundEnabled
+                  ? (isDark ? AppColors.accentDark : AppColors.accent)
+                  : (isDark ? AppColors.inkMutedDark : AppColors.inkMutedLight),
+            ),
+            tooltip: _soundEnabled ? 'Matikan Suara Timer' : 'Nyalakan Suara Timer',
+            onPressed: () => setState(() => _soundEnabled = !_soundEnabled),
+          ),
           Container(
             margin: const EdgeInsets.only(right: 16),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -461,13 +481,25 @@ class _WorkoutSessionScreenState extends State<WorkoutSessionScreen> {
                           ],
                         ),
                       ),
-                      Text(
-                        '${_restSecondsRemaining}s',
-                        style: GoogleFonts.inter(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900,
-                          color: isDark ? AppColors.accentDark : AppColors.accent,
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (_soundEnabled && _restSecondsRemaining <= 3 && _restSecondsRemaining > 0)
+                            const Padding(
+                              padding: EdgeInsets.only(right: 6),
+                              child: Icon(Icons.volume_up_rounded, size: 18, color: Colors.orangeAccent),
+                            ),
+                          Text(
+                            '${_restSecondsRemaining}s',
+                            style: GoogleFonts.inter(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w900,
+                              color: _restSecondsRemaining <= 3
+                                  ? Colors.orangeAccent
+                                  : (isDark ? AppColors.accentDark : AppColors.accent),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(width: 8),
                       IconButton(
